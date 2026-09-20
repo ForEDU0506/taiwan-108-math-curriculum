@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="從生活情境出發，連結臺灣 108 課綱、數學教學設計與學術實務。" />
+  <title>數學來自生活｜臺灣 108 數學課綱學習活動設計</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <button class="icon-button" id="sidebarToggle" aria-label="開啟或關閉索引" aria-expanded="true">☰</button>
+    <a class="brand" href="#home"><span class="brand-mark">數</span><span>數學課綱與教學設計平台</span></a>
+    <nav class="top-nav" aria-label="主要導覽">
+      <a href="#teaching">一般教學設計</a>
+      <a href="#academic">學術與現場實務</a>
+      <a class="nav-disabled" href="#student-diaries" aria-disabled="true">學生日記（預留）</a>
+      <a href="#submit">投稿</a>
+    </nav>
+  </header>
+
+  <div class="shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-heading"><span>索引</span><button class="close-button" id="sidebarClose" aria-label="收合索引">×</button></div>
+      <p class="sidebar-note">索引用來快速定位內容，網站主體仍以投稿與學習內容為主。</p>
+      <label class="filter-label" for="gradeFilter">年級</label>
+      <select id="gradeFilter"><option value="all">全部年級</option><option value="4">四年級</option><option value="7">七年級</option><option value="8">八年級</option></select>
+      <label class="filter-label" for="themeFilter">主題</label>
+      <select id="themeFilter"><option value="all">全部主題</option><option value="N">N 數與量</option><option value="A">A 代數</option><option value="D">D 資料與不確定性</option></select>
+      <div class="index-links">
+        <a href="#featured">編輯精選</a>
+        <a href="#teaching">一般教學設計</a>
+        <a href="#academic">學術與現場實務</a>
+        <a class="future-link" href="#student-diaries">學生數學日記（預留空間）</a>
+      </div>
+    </aside>
+
+    <main class="main" id="home">
+      <section class="intro section-pad">
+        <div>
+          <p class="eyebrow">臺灣 108 數學課綱學習活動設計</p>
+          <h1>數學來自生活，學習回到生活。</h1>
+          <p class="lead">以課綱指標為索引，連結生活情境、教學設計與學術實務，協助教師設計能理解、表達、推理與應用數學的學習經驗。</p>
+        </div>
+        <div class="intro-actions"><a class="button primary" href="#featured">查看編輯精選</a><a class="button" href="#submit">分享教學設計</a></div>
+      </section>
+
+      <section class="search-row section-pad" aria-label="搜尋內容">
+        <label class="search-box"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="搜尋生活情境、指標、作者或關鍵字" /><button id="searchButton">搜尋</button></label>
+        <p id="resultMessage" class="result-message" aria-live="polite"></p>
+      </section>
+
+      <section id="featured" class="content-section section-pad">
+        <div class="section-header"><div><p class="eyebrow">內容優先</p><h2>編輯精選</h2></div><a href="#teaching">查看一般教學設計 →</a></div>
+        <div class="featured-grid">
+          <article class="feature-card" data-grade="7" data-theme="N" data-search="正負數 數線 樓層 海拔 溫度 生活情境">
+            <span class="content-type teaching-type">一般教學設計</span><h3>以樓層、海拔與溫度理解正負數</h3><p>從生活中的位置與變化出發，讓學生比較不同表徵，說明數線上的數學關係。</p><div class="tags"><span>七年級</span><span>N 數與量</span><span>生活情境</span></div><a href="#teaching">閱讀教學設計</a>
+          </article>
+          <article class="feature-card academic-card" data-grade="8" data-theme="A" data-search="建構主義 代數 學術 實務 理論轉化">
+            <span class="content-type academic-type">學術與實務｜編輯選讀</span><h3>以建構主義重新思考代數概念教學</h3><p>不是可直接套用的教案，而是提供理論轉化、現場限制與多元設計的思考入口。</p><div class="tags"><span>八年級</span><span>A 代數</span><span>設計思考</span></div><a href="#academic">進入學術與實務</a>
+          </article>
+          <article class="feature-card life-card" data-grade="4" data-theme="D" data-search="資料 圖表 班級調查 生活素養 判讀">
+            <span class="content-type life-type">生活中的數學素養</span><h3>從班級調查到資料判讀</h3><p>讓學生整理真實資料、比較圖表，並回到生活判斷結果是否合理。</p><div class="tags"><span>四年級</span><span>D 資料與不確定性</span><span>數學素養</span></div><a href="#teaching">查看相關內容</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="teaching" class="content-section section-pad">
+        <div class="section-header"><div><p class="eyebrow">可參考、可調整、可延伸</p><h2>一般教學設計</h2></div><span class="section-description">從生活問題出發，連結年級、主題與課綱指標。</span></div>
+        <div class="card-grid filtered-content">
+          <article class="resource-card" data-grade="7" data-theme="N" data-search="比例 百分率 購物 折扣 生活">
+            <span class="content-type teaching-type">一般教學設計</span><h3>從購物折扣理解比例與百分率</h3><p>以價格、折扣與成長率建立量化比較，並請學生說明哪一種選擇較合理。</p><div class="resource-meta">七年級 · N 數與量 · 比例與百分率</div>
+          </article>
+          <article class="resource-card" data-grade="7" data-theme="D" data-search="資料 圖表 班級調查 統計">
+            <span class="content-type teaching-type">一般教學設計</span><h3>班級資料的討論與呈現</h3><p>將班級真實資料整理成圖表，讓學生練習提出問題、解釋資料與檢查判斷。</p><div class="resource-meta">七年級 · D 資料與不確定性</div>
+          </article>
+          <article class="resource-card" data-grade="8" data-theme="A" data-search="代數 生活 關係式 電費">
+            <span class="content-type teaching-type">一般教學設計</span><h3>從家庭用電看數量關係</h3><p>從帳單與用電資料建立關係式，討論符號如何幫助我們描述生活變化。</p><div class="resource-meta">八年級 · A 代數 · 生活問題</div>
+          </article>
+        </div>
+      </section>
+
+      <section id="academic" class="academic-section section-pad">
+        <div class="section-header"><div><p class="eyebrow">理論與現場的對話</p><h2>學術與現場實務</h2></div><span class="section-description">獨立於一般教學設計，提供思考與轉化，不以熱門度排名。</span></div>
+        <div class="academic-layout"><div><h3>教學設計思考與學術轉化</h3><p>這裡的內容不代表可以直接套用，也不是一般教案的高分版本。它協助教師理解理論、看見限制，並發展自己的多元設計。</p><a class="button" href="#academic-list">閱讀編輯選讀</a></div><div id="academic-list" class="academic-list"><article><span class="content-type academic-type">編輯選讀</span><h3>探究式學習如何回到生活情境</h3><p>從研究觀點思考提問、表徵與課堂節奏，再回到教師可調整的設計選擇。</p></article><article><span class="content-type academic-type">現場反思</span><h3>素養導向不只是把生活名詞放進題目</h3><p>討論學生是否真正進行數學化、推理、溝通與合理性判斷。</p></article></div></div>
+      </section>
+
+      <section id="student-diaries" class="reserved-section section-pad"><div><p class="eyebrow">後續規劃</p><h2>學生數學日記</h2><p>此區先保留網站位置。未來將容納一小篇、一小篇的學生數學思考與生活觀察，形式與公開方式待後續討論；在取得適當同意與保護個資的前提下，也可成為教學研究與課堂理解的資料來源。</p></div><span class="reserved-badge">功能預留，尚未開放</span></section>
+
+      <section id="submit" class="submit-section section-pad"><h2>讓生活中的數學故事成為教學設計</h2><p>第一階段先收集已整理、可公開的教學設計與學術實務內容；投稿流程與審核規則將另行建立。</p><a class="button primary" href="mailto:">投稿功能規劃中</a></section>
+    </main>
+  </div>
+  <footer class="footer">數學來自生活，學習回到生活。<span>｜網站雛型階段</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>
