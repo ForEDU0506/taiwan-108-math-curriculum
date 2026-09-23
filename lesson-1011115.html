@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="日新三資數學作業 1011115 / 1011224：建立語意理解三步鷹架、括號未知數算式填充題、加減互逆思維與情境擬題訓練。" />
+  <title>語意理解與算式填充題：加減逆運算與情境擬題｜數學來自生活</title>
+  <style>
+    :root {
+      --bg: #f3f6fb;
+      --panel: #ffffff;
+      --panel-soft: #f7f9fc;
+      --line: #dfe7f2;
+      --text: #1f2937;
+      --muted: #5f6f82;
+      --primary: #2d4d9c;
+      --primary-dark: #1d3876;
+      --primary-soft: #edf4ff;
+      --accent: #f0b429;
+      --success: #2d8f6d;
+      --success-soft: #eafaf4;
+      --warning: #b96d1d;
+      --warning-soft: #fff3e4;
+      --shadow: rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Microsoft JhengHei", "PingFang TC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(8px);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    .top-nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .top-nav a {
+      font-weight: 700;
+      color: var(--text);
+      padding: 8px 0;
+    }
+
+    .top-nav a:hover {
+      color: var(--primary);
+    }
+
+    .page-shell {
+      padding: 38px 0 72px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #edf4ff 0%, #f9fbff 100%);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 10px 26px var(--shadow);
+    }
+
+    .breadcrumb {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 12px;
+    }
+
+    .breadcrumb a {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin: 0 0 12px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      border: 1px solid #d7e5ff;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+      line-height: 1.2;
+      color: var(--primary-dark);
+    }
+
+    .lead {
+      max-width: 820px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .pill.accent {
+      background: #fef8eb;
+      color: #9c6800;
+      border-color: #fce3b8;
+    }
+
+    .pill.success {
+      background: var(--success-soft);
+      color: var(--success);
+      border-color: #bdf0dc;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.8fr) minmax(290px, 0.75fr);
+      gap: 28px;
+      margin-top: 28px;
+    }
+
+    .main-article,
+    .side-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.03);
+    }
+
+    .main-article {
+      padding: 32px 30px;
+    }
+
+    .section-block + .section-block {
+      margin-top: 32px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-block h2 {
+      margin: 0 0 16px;
+      font-size: 1.45rem;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-block p,
+    .section-block li {
+      color: #374151;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .callout {
+      background: var(--panel-soft);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 14px 14px 0;
+      padding: 18px 20px;
+      margin: 20px 0;
+    }
+
+    /* Step framework */
+    .step-box-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .step-box {
+      background: #ffffff;
+      border: 1px solid #dbe6f5;
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+
+    .step-box-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .step-number {
+      background: var(--primary-soft);
+      color: var(--primary);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.9rem;
+    }
+
+    .example-case {
+      background: #fbfcfe;
+      border: 1px solid #e1e9f5;
+      border-radius: 14px;
+      padding: 22px;
+      margin: 20px 0;
+    }
+
+    .example-case h3 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      color: var(--primary-dark);
+    }
+
+    .math-formula {
+      font-family: "Cascadia Code", "Courier New", monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      background: #eef4ff;
+      padding: 6px 14px;
+      border-radius: 8px;
+      display: inline-block;
+      color: var(--primary-dark);
+      margin: 6px 0;
+    }
+
+    .timeline-svg {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      margin: 16px 0;
+      display: block;
+    }
+
+    .side-panel {
+      padding: 24px;
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+    }
+
+    .side-panel h3 {
+      margin: 0 0 16px;
+      font-size: 1.15rem;
+      color: var(--primary-dark);
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary-soft);
+    }
+
+    .fact-list {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .fact-list li {
+      display: grid;
+      gap: 4px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .fact-list li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .fact-label {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+    }
+
+    .fact-value {
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .footer {
+      padding: 28px 0 40px;
+      text-align: center;
+      font-weight: 700;
+      color: var(--primary-dark);
+      background: #eef4ff;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 980px) {
+      .content-grid { grid-template-columns: 1fr; }
+      .side-panel { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="index.html"><span class="brand-mark">數</span><span>數學課綱與教學設計平台</span></a>
+      <nav class="top-nav" aria-label="主要導覽">
+        <a href="index.html">首頁</a>
+        <a href="list.html">教材列表</a>
+        <a href="detail.html">詳情範例</a>
+        <a href="index.html#curriculum">12年國教課綱</a>
+        <a href="index.html#teaching">一般教學設計</a>
+        <a href="index.html#student-work">學生作品</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div class="container">
+      <section class="hero">
+        <div class="breadcrumb"><a href="index.html">首頁</a> / <a href="list.html">教材列表</a> / 原創教學方案</div>
+        <p class="eyebrow">日新國小資優班思維教材實錄 1011115 / 1011224</p>
+        <h1>語意理解與算式填充題：加減逆運算與情境擬題</h1>
+        <p class="lead">不只是死背「求加數用減法」，而是建立「推想情境 ➔ 圈關鍵字 ➔ 列未知數式」的三步思考鷹架；更讓孩子反向為算式創編生活故事，達成真正的代數前置思維。</p>
+        <div class="meta-row">
+          <span class="pill accent">三年級</span>
+          <span class="pill">R 關係與代數思維</span>
+          <span class="pill">R-3-2 加減互逆</span>
+          <span class="pill">R-3-1 算式與符號括號</span>
+          <span class="pill success">情境擬題與數學建模</span>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <article class="main-article">
+          <!-- 一、為什麼需要這份教材 -->
+          <div class="section-block">
+            <h2>🎯 1. 教材設計背景：破除「算術盲猜運算符號」的痛點</h2>
+            <p>小學中年級學生在面對應用問題時，常見的最大瓶頸是：<strong>「看見題目有兩個數字，就隨便抓起來加一加或減一減」</strong>，缺乏對題幹語意關係的理解。</p>
+            <p>為了解決這個現場核心痛點，本教材設計了一套<strong>結構化的三步驟思維鷹架</strong>，並引進<strong>「計算題情境化練習」（逆向擬題）</strong>，讓學生從「解題者」提升為「情境編撰者與問題建立者」。</p>
+          </div>
+
+          <!-- 二、三步鷹架分析 -->
+          <div class="section-block">
+            <h2>🪜 2. 依題意列式的「三步思維鷹架」</h2>
+            <div class="step-box-grid">
+              <div class="step-box">
+                <div class="step-box-header">
+                  <span class="step-number">1</span>
+                  <span>由題目語意推想生活情境（語言層次）</span>
+                </div>
+                <p>先不要急著寫數字！先用自己的話說出整體情境架構：<br/>
+                <em>「原來有的數量，加上後來游來的數量，會等於全部的數量。」</em></p>
+              </div>
+
+              <div class="step-box">
+                <div class="step-box-header">
+                  <span class="step-number">2</span>
+                  <span>圈出決定運算符號的關鍵字，列出關係式（結構層次）</span>
+                </div>
+                <p>圈出關鍵字詞（例如：「<strong>再</strong>...<strong>就會有</strong>...」）。將文字關係轉譯為運算關係式：<br/>
+                <span class="math-formula">原來的 ＋ 後來的 ＝ 全部的</span></p>
+              </div>
+
+              <div class="step-box">
+                <div class="step-box-header">
+                  <span class="step-number">3</span>
+                  <span>將所求項目以 ( ) 表示，列出算式填充題（符號代數層次）</span>
+                </div>
+                <p>將題目問的未知數填入括號，列出精確算式填充題：<br/>
+                <span class="math-formula">403 ＋ ( &nbsp; ) ＝ 600</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 三、加減互逆思維與求值要點 -->
+          <div class="section-block">
+            <h2>🔄 3. 求解要點：加減互逆的算理理解</h2>
+            <p>在國小三年級，括號 <code>( )</code> 就是國中代數方程式中未知數 <code>x</code> 的前身。學生需要掌握「逆運算」原理：</p>
+            
+            <div class="example-case">
+              <h3>【範例一：求加數】櫻花鉤吻鮭的生活題</h3>
+              <p><strong>題目：</strong>溪中有 403 條櫻花鉤吻鮭，再游來幾條，就會有 600 條櫻花鉤吻鮭？</p>
+              <p><strong>算式填充題：</strong><code>403 ＋ ( &nbsp; ) ＝ 600</code></p>
+              <p><strong>計算要點：</strong>當要求出的答案是「加數」，而不是「和」時，要以「和」去減掉「被加數」。</p>
+              <div class="callout" style="background: #eef6ff; border-left-color: var(--primary);">
+                <p><strong>計算過程（拆解心算巧思）：</strong><br/>
+                <span class="math-formula">600 － 403 ＝ 600 － 400 － 3 ＝ 200 － 3 ＝ 197</span><br/>
+                答：197 條</p>
+              </div>
+            </div>
+
+            <div class="example-case">
+              <h3>【範例二：求被加數】玲玲存錢的撲滿題</h3>
+              <p><strong>題目：</strong>玲玲的撲滿裡原有一些錢，再存 27 元，撲滿裡就有 420 元，玲玲原來有多少元？</p>
+              <p><strong>關係式：</strong>原來的錢 ＋ 存進去的錢 ＝ 現在有的錢</p>
+              <p><strong>算式填充題：</strong><code>( &nbsp; ) ＋ 27 ＝ 420</code></p>
+              <p><strong>計算過程：</strong><code>420 － 27 ＝ 393</code> （答：393 元）</p>
+            </div>
+
+            <div class="example-case">
+              <h3>【範例三：線段圖視覺表徵】烏龜與兔子賽跑</h3>
+              <p><strong>題目：</strong>烏龜跑了 365 公尺，還要跑多少公尺，才會到達兔子休息的地方（526 公尺處）？</p>
+              <!-- 數線線段圖 SVG -->
+              <svg class="timeline-svg" viewBox="0 0 600 120" xmlns="http://www.w3.org/2000/svg">
+                <!-- 總路徑線段 -->
+                <line x1="40" y1="50" x2="540" y2="50" stroke="#2d4d9c" stroke-width="4" stroke-linecap="round"/>
+                <!-- 起點刻度 -->
+                <circle cx="40" cy="50" r="6" fill="#2d4d9c"/>
+                <text x="30" y="80" font-family="sans-serif" font-size="14" font-weight="bold" fill="#2d4d9c">起點</text>
+                <!-- 烏龜位置刻度 -->
+                <circle cx="360" cy="50" r="7" fill="#2d8f6d"/>
+                <text x="345" y="80" font-family="sans-serif" font-size="14" font-weight="bold" fill="#2d8f6d">365 公尺(🐢)</text>
+                <!-- 兔子位置終點 -->
+                <circle cx="540" cy="50" r="7" fill="#b96d1d"/>
+                <text x="500" y="80" font-family="sans-serif" font-size="14" font-weight="bold" fill="#b96d1d">526 公尺(🐰)</text>
+                <!-- 上方大括號標示已跑 -->
+                <line x1="40" y1="30" x2="360" y2="30" stroke="#5f6f82" stroke-width="2" stroke-dasharray="4"/>
+                <text x="170" y="22" font-family="sans-serif" font-size="13" fill="#5f6f82">已跑 365 公尺</text>
+                <!-- 未知數括號區間 -->
+                <line x1="360" y1="30" x2="540" y2="30" stroke="#2d4d9c" stroke-width="2.5"/>
+                <text x="420" y="22" font-family="sans-serif" font-size="14" font-weight="bold" fill="#2d4d9c">還要跑 ( ? ) 公尺</text>
+              </svg>
+              <p><strong>算式填充題：</strong><code>365 ＋ ( &nbsp; ) ＝ 526</code> ➔ <code>526 － 365 ＝ 161</code>（答：161 公尺）</p>
+            </div>
+          </div>
+
+          <!-- 四、計算題情境化訓練 -->
+          <div class="section-block">
+            <h2>✍️ 4. 創新教學亮點：計算題情境化練習（情境擬題）</h2>
+            <p>傳統練習給情境求答案，本教材反向要求：<strong>「給出抽象算式，由學生自主創作生活情境題目」</strong>！</p>
+            <ul>
+              <li><strong>題目一：</strong><code>289 ＋ ( &nbsp; ) ＝ 958</code><br/>
+                引導詞：「再…… 就會有……」<br/>
+                <em>示範創作：溪中有 289 條櫻花鉤吻鮭，再游來幾條，就會有 958 條櫻花鉤吻鮭？</em>
+              </li>
+              <li><strong>題目二：</strong><code>( &nbsp; ) ＋ 239 ＝ 621</code><br/>
+                引導詞：「原本有…… 又增加了…… 現在共有……」<br/>
+                <em>讓學生練習編寫「被加數未知」的存錢、收集卡片或排隊情境。</em>
+              </li>
+              <li><strong>題目三：</strong><code>399 ＋ ( &nbsp; ) ＝ 2425</code><br/>
+                進階大數情境，引導學生融入生活經驗（購物預算、跑步里程、書本頁數等）。
+              </li>
+            </ul>
+          </div>
+
+          <!-- 五、課堂成效與反思 -->
+          <div class="section-block">
+            <h2>💡 5. 教學現場成效與省思</h2>
+            <p>透過這樣的訓練，孩子在面對文字題時不再焦慮，因為他們腦中已經建立起清晰的解題地圖：</p>
+            <ol>
+              <li>遇到問題先找情境主軸，判斷是「增加（加法）」還是「減少（減法）」。</li>
+              <li>把不知道的東西用 <code>( )</code> 穩穩地框在算式裡，不要急著心算跳步。</li>
+              <li>最後利用「和減被加數」或「和減加數」的互逆關係從容計算。</li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- 側邊欄資訊 -->
+        <aside class="side-panel">
+          <h3>課程基本資訊</h3>
+          <ul class="fact-list">
+            <li>
+              <span class="fact-label">教案代碼</span>
+              <span class="fact-value">1011115 / 1011224（日新三資）</span>
+            </li>
+            <li>
+              <span class="fact-label">適合年級</span>
+              <span class="fact-value">國小三年級</span>
+            </li>
+            <li>
+              <span class="fact-label">數學主題</span>
+              <span class="fact-value">R 關係 / N 數與量</span>
+            </li>
+            <li>
+              <span class="fact-label">課綱條目</span>
+              <span class="fact-value">R-3-2 加減互逆關係<br/>R-3-1 括號算式填充題<br/>N-3-2 加減計算生活應用</span>
+            </li>
+            <li>
+              <span class="fact-label">核心素養</span>
+              <span class="fact-value">數-E-A2 分析與規劃流程<br/>數-E-B1 語言符號轉譯<br/>數-E-B2 數線與圖表表徵</span>
+            </li>
+            <li>
+              <span class="fact-label">課程研發</span>
+              <span class="fact-value">臺北市日新國小資優班<br/>馮奇偉 老師</span>
+            </li>
+            <li>
+              <span class="fact-label">對應檔案</span>
+              <span class="fact-value">WeiData/日新三資數學作業1011115.pdf<br/>WeiData/日新三資數學作業1011224 (1).docx</span>
+            </li>
+          </ul>
+
+          <div style="margin-top: 24px;">
+            <a href="list.html" class="pill" style="display: block; text-align: center; background: var(--primary); color: #fff; padding: 10px;">← 返回教材列表</a>
+          </div>
+        </aside>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>數學來自生活，學習回到生活｜臺灣 108 數學課綱學習活動設計平台</p>
+    </div>
+  </footer>
+</body>
+</html>

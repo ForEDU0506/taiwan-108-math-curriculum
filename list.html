@@ -102,39 +102,39 @@
     }
 
     .page-shell {
-      padding: 42px 0 72px;
+      padding: 38px 0 72px;
     }
 
     .hero {
       background: linear-gradient(135deg, #edf4ff 0%, #f9fbff 100%);
       border: 1px solid var(--line);
       border-radius: 24px;
-      padding: 28px 28px 22px;
+      padding: 28px;
       box-shadow: 0 10px 26px var(--shadow);
     }
 
     .eyebrow {
       display: inline-block;
       margin: 0 0 12px;
-      padding: 8px 12px;
+      padding: 6px 14px;
       border-radius: 999px;
       background: var(--primary-soft);
       color: var(--primary);
       font-weight: 800;
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       letter-spacing: 0.04em;
       border: 1px solid #d7e5ff;
     }
 
     h1 {
-      margin: 0 0 10px;
-      letter-spacing: -0.05em;
-      font-size: clamp(2rem, 4vw, 3.4rem);
-      line-height: 1.1;
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 3.5vw, 2.9rem);
+      line-height: 1.15;
+      color: var(--primary-dark);
     }
 
     .lead {
-      max-width: 760px;
+      max-width: 820px;
       margin: 0;
       color: var(--muted);
       font-size: 1.05rem;
@@ -194,7 +194,7 @@
     .card-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
+      gap: 20px;
     }
 
     .resource-card {
@@ -202,24 +202,41 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: 0 10px 24px rgba(15, 23, 42, 0.03);
-      padding: 20px;
+      padding: 22px;
       display: flex;
       flex-direction: column;
       gap: 12px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .resource-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.06);
+    }
+
+    .resource-card.featured {
+      border-color: #bad3ff;
+      background: linear-gradient(180deg, #ffffff 0%, #fafdff 100%);
     }
 
     .content-type {
       display: inline-block;
       align-self: flex-start;
-      padding: 7px 10px;
+      padding: 6px 12px;
       border-radius: 999px;
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       font-weight: 800;
     }
 
     .teaching-type {
       color: var(--primary);
       background: var(--primary-soft);
+    }
+
+    .featured-type {
+      color: #925800;
+      background: #fef4dc;
+      border: 1px solid #fbe3ad;
     }
 
     .academic-type {
@@ -236,12 +253,14 @@
       margin: 0;
       font-size: 1.35rem;
       line-height: 1.35;
+      color: var(--primary-dark);
     }
 
     .resource-card p {
       margin: 0;
       color: var(--muted);
       font-size: 0.96rem;
+      line-height: 1.6;
     }
 
     .tags {
@@ -254,12 +273,17 @@
     .resource-meta {
       display: inline-flex;
       align-items: center;
-      padding: 6px 10px;
+      padding: 5px 10px;
       background: #f3f4f6;
       border-radius: 999px;
       font-size: 0.74rem;
       color: var(--text);
       font-weight: 700;
+    }
+
+    .tags span.highlight {
+      background: #eaf3ff;
+      color: var(--primary);
     }
 
     .meta-line {
@@ -269,6 +293,8 @@
       gap: 10px;
       align-items: center;
       flex-wrap: wrap;
+      padding-top: 10px;
+      border-top: 1px solid #f0f4f9;
     }
 
     .resource-meta {
@@ -280,6 +306,13 @@
     .detail-link {
       color: var(--primary);
       font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .detail-link:hover {
+      text-decoration: underline;
     }
 
     .footer {
@@ -291,7 +324,7 @@
       border-top: 1px solid var(--line);
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 980px) {
       .card-grid { grid-template-columns: 1fr 1fr; }
     }
 
@@ -322,116 +355,212 @@
   <main class="page-shell">
     <div class="container">
       <section class="hero">
-        <p class="eyebrow">教師可直接使用的內容資源</p>
+        <p class="eyebrow">教師現場可直接使用的教學資源庫</p>
         <h1>教材列表</h1>
-        <p class="lead">依課綱、年級、主題與教學目的分類，讓教師在教學現場快速找到適合的素材與參考資源。</p>
+        <p class="lead">依課綱指標、年級、主題與生活情境分類，提供原創教學設計、學習單實錄與跨領域統整教案。</p>
 
         <div class="filter-bar" aria-label="內容篩選">
           <label class="filter-box">
             <span>年級</span>
-            <select aria-label="選擇年級">
-              <option>全部</option>
-              <option>四年級</option>
-              <option>七年級</option>
-              <option>八年級</option>
+            <select aria-label="選擇年級" id="gradeFilter">
+              <option value="all">全部年級</option>
+              <option value="3">三年級</option>
+              <option value="4">四年級</option>
+              <option value="mid-high">中高年級</option>
+              <option value="7">七年級</option>
+              <option value="8">八年級</option>
             </select>
           </label>
           <label class="filter-box">
             <span>主題</span>
-            <select aria-label="選擇主題">
-              <option>全部</option>
-              <option>N 數與量</option>
-              <option>A 代數</option>
-              <option>D 資料與不確定性</option>
+            <select aria-label="選擇主題" id="topicFilter">
+              <option value="all">全部主題</option>
+              <option value="S">S 空間與形狀</option>
+              <option value="R">R 關係與代數</option>
+              <option value="N">N 數與量</option>
+              <option value="D">D 資料與不確定性</option>
+              <option value="cross">跨領域生活素養</option>
             </select>
           </label>
           <label class="filter-box">
             <span>類型</span>
-            <select aria-label="選擇內容類型">
-              <option>全部</option>
-              <option>課綱素材</option>
-              <option>教學設計</option>
-              <option>學生作品</option>
+            <select aria-label="選擇內容類型" id="typeFilter">
+              <option value="all">全部類型</option>
+              <option value="featured">經典原創教案</option>
+              <option value="curriculum">課綱素材</option>
+              <option value="teaching">教學設計</option>
+              <option value="cross">學校本位統整</option>
+              <option value="student">學生作品</option>
             </select>
           </label>
         </div>
       </section>
 
       <div class="section-header">
-        <h2>相關資源</h2>
-        <span class="note">共 6 筆內容</span>
+        <h2>精選與推薦教材</h2>
+        <span class="note">共 9 筆完整內容</span>
       </div>
 
       <section class="card-grid" aria-label="教材列表">
-        <article class="resource-card">
+        <!-- 原創教案 1 -->
+        <article class="resource-card featured" data-grade="4" data-topic="S" data-type="featured">
+          <span class="content-type featured-type">經典原創教案 ★</span>
+          <h3>草山遊學：藍染中的幾何對稱與圖形推理</h3>
+          <p>從草山藍染手作體驗出發，透過折疊軸線與綁紮工具的阻隔規律，探討四等份分割、線對稱與空間幾何逆向推理。</p>
+          <div class="tags">
+            <span class="highlight">三～四年級</span>
+            <span>S 空間與形狀</span>
+            <span>S-4-6 線對稱</span>
+            <span>日新國小 1011102</span>
+          </div>
+          <div class="meta-line">
+            <span class="resource-meta">生活體驗 × 幾何探究</span>
+            <a class="detail-link" href="lesson-1011102.html">閱讀完整教案 →</a>
+          </div>
+        </article>
+
+        <!-- 原創教案 2 -->
+        <article class="resource-card featured" data-grade="3" data-topic="R" data-type="featured">
+          <span class="content-type featured-type">經典原創教案 ★</span>
+          <h3>語意理解與算式填充題：加減逆運算與情境擬題</h3>
+          <p>建立「推想情境 ➔ 圈關鍵字 ➔ 列未知數式」三步鷹架，破除盲猜運算符號盲點；並反向讓孩子自編生活故事題。</p>
+          <div class="tags">
+            <span class="highlight">三年級</span>
+            <span>R 關係與代數</span>
+            <span>R-3-2 加減互逆</span>
+            <span>日新國小 1011115</span>
+          </div>
+          <div class="meta-line">
+            <span class="resource-meta">代數思維 × 情境擬題</span>
+            <a class="detail-link" href="lesson-1011115.html">閱讀完整教案 →</a>
+          </div>
+        </article>
+
+        <!-- 原創教案 3 -->
+        <article class="resource-card featured" data-grade="mid-high" data-topic="cross" data-type="cross">
+          <span class="content-type featured-type">學校本位統整 ★</span>
+          <h3>河映史蹟藝趣稻埕：建築幾何與跨領域生活數學素養</h3>
+          <p>走出教室走入大稻埕！從「屋頂、門、窗、柱、建材、裝飾」六大幾何觀察指標，培養觀察、比較、分類、歸納與推論六大能力。</p>
+          <div class="tags">
+            <span class="highlight">四至六年級</span>
+            <span>跨領域素養</span>
+            <span>S-4-4 中軸對稱</span>
+            <span>城市遊學實錄</span>
+          </div>
+          <div class="meta-line">
+            <span class="resource-meta">城市遊學 × 空間幾何</span>
+            <a class="detail-link" href="lesson-dadaocheng.html">閱讀完整教案 →</a>
+          </div>
+        </article>
+
+        <!-- 現有教案 4 -->
+        <article class="resource-card" data-grade="7" data-topic="N" data-type="curriculum">
           <span class="content-type teaching-type">課綱素材</span>
           <h3>正負數與數線：從位置與變化理解數</h3>
-          <p>先從樓層、海拔與溫度等生活情境出發，形成正負數與數線的直觀理解。</p>
+          <p>先從樓層、海拔與溫度等生活情境出發，形成正負數與數線的直觀理解與參照點概念。</p>
           <div class="tags"><span>七年級</span><span>N 數與量</span></div>
           <div class="meta-line">
             <span class="resource-meta">12年國教課綱</span>
-            <a class="detail-link" href="detail.html">查看詳情</a>
+            <a class="detail-link" href="detail.html">查看詳情 →</a>
           </div>
         </article>
 
-        <article class="resource-card">
+        <!-- 現有教案 5 -->
+        <article class="resource-card" data-grade="7" data-topic="D" data-type="teaching">
           <span class="content-type teaching-type">教學設計</span>
           <h3>班級資料的討論與呈現</h3>
-          <p>利用班級真實資料整理圖表，讓學生練習提出問題、比較與說明數據。</p>
+          <p>利用班級真實資料整理圖表，讓學生練習提出問題、比較與說明數據分佈。</p>
           <div class="tags"><span>七年級</span><span>D 資料與不確定性</span></div>
           <div class="meta-line">
             <span class="resource-meta">生活資料</span>
-            <a class="detail-link" href="detail.html">查看詳情</a>
+            <a class="detail-link" href="detail.html">查看詳情 →</a>
           </div>
         </article>
 
-        <article class="resource-card">
+        <!-- 現有教案 6 -->
+        <article class="resource-card" data-grade="8" data-topic="A" data-type="academic">
           <span class="content-type academic-type">學術與實務</span>
           <h3>以建構主義重新思考代數概念教學</h3>
-          <p>從理論轉化到現場設計，討論代數課程如何回到學生的理解與表達。</p>
+          <p>從理論轉化到現場設計，討論代數課程如何回到學生的自主理解與語言表達。</p>
           <div class="tags"><span>八年級</span><span>A 代數</span></div>
           <div class="meta-line">
             <span class="resource-meta">研究取向</span>
-            <a class="detail-link" href="detail.html">查看詳情</a>
+            <a class="detail-link" href="detail.html">查看詳情 →</a>
           </div>
         </article>
 
-        <article class="resource-card">
+        <!-- 現有教案 7 -->
+        <article class="resource-card" data-grade="8" data-topic="A" data-type="curriculum">
           <span class="content-type teaching-type">課綱素材</span>
           <h3>代數關係與生活問題</h3>
-          <p>從家庭支出與用電資料建立關係式，幫助學生理解變數與關係。</p>
+          <p>從家庭支出與用電資料建立關係式，幫助學生理解變數、常數與生活對應關係。</p>
           <div class="tags"><span>八年級</span><span>A 代數</span></div>
           <div class="meta-line">
             <span class="resource-meta">生活情境</span>
-            <a class="detail-link" href="detail.html">查看詳情</a>
+            <a class="detail-link" href="detail.html">查看詳情 →</a>
           </div>
         </article>
 
-        <article class="resource-card">
+        <!-- 現有教案 8 -->
+        <article class="resource-card" data-grade="7" data-topic="N" data-type="student">
           <span class="content-type life-type">學生作品</span>
           <h3>羅馬數字與阿拉伯數字的轉換</h3>
-          <p>學生透過對照與比較，形成數字系統與記號規則的理解，並表達其思考過程。</p>
+          <p>學生透過對照與比較，形成數字系統與記號規則的理解，並表達其思考歷程。</p>
           <div class="tags"><span>七年級</span><span>數字表徵</span></div>
           <div class="meta-line">
             <span class="resource-meta">作品展示</span>
-            <a class="detail-link" href="detail.html">查看詳情</a>
+            <a class="detail-link" href="detail.html">查看詳情 →</a>
           </div>
         </article>
 
-        <article class="resource-card">
+        <!-- 現有教案 9 -->
+        <article class="resource-card" data-grade="8" data-topic="A" data-type="student">
           <span class="content-type life-type">學生作品</span>
           <h3>生活中的代數問題</h3>
-          <p>學生將生活情境抽象成關係式，藉此說明變數如何描述真實情況。</p>
-          <div class="tags"><span>八年級</span><span>代數</span></div>
+          <p>學生將生活情境抽象成關係式，藉此說明變數如何描述真實情境中的未知量。</p>
+          <div class="tags"><span>八年級</span><span>代數思維</span></div>
           <div class="meta-line">
             <span class="resource-meta">寫作與解題</span>
-            <a class="detail-link" href="detail.html">查看詳情</a>
+            <a class="detail-link" href="detail.html">查看詳情 →</a>
           </div>
         </article>
       </section>
     </div>
   </main>
 
-  <footer class="footer">數學來自生活，學習回到生活。｜教材列表</footer>
+  <footer class="footer">數學來自生活，學習回到生活。｜臺灣 108 數學課綱學習活動設計平台</footer>
+
+  <script>
+    const gradeSelect = document.getElementById('gradeFilter');
+    const topicSelect = document.getElementById('topicFilter');
+    const typeSelect = document.getElementById('typeFilter');
+    const cards = document.querySelectorAll('.resource-card');
+
+    function filterCards() {
+      const grade = gradeSelect.value;
+      const topic = topicSelect.value;
+      const type = typeSelect.value;
+
+      cards.forEach(card => {
+        const cardGrade = card.dataset.grade;
+        const cardTopic = card.dataset.topic;
+        const cardType = card.dataset.type;
+
+        const matchGrade = (grade === 'all' || cardGrade === grade || (grade === '4' && cardGrade === '4') || (grade === '3' && cardGrade === '3'));
+        const matchTopic = (topic === 'all' || cardTopic === topic);
+        const matchType = (type === 'all' || cardType === type);
+
+        if (matchGrade && matchTopic && matchType) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    gradeSelect.addEventListener('change', filterCards);
+    topicSelect.addEventListener('change', filterCards);
+    typeSelect.addEventListener('change', filterCards);
+  </script>
 </body>
 </html>
