@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="數獨觀察、邏輯推理與決策思維教學完整指南：專注於培養耐性、系統化觀察、雙重智慧對焦、低年級認知鷹架與決策思維。" />
+  <title>數獨觀察、邏輯推理與決策思維教學完整指南｜數學來自生活</title>
+  <style>
+    :root {
+      --bg: #f3f6fb;
+      --panel: #ffffff;
+      --panel-soft: #f7f9fc;
+      --line: #dfe7f2;
+      --text: #1f2937;
+      --muted: #5f6f82;
+      --primary: #1e3a8a;
+      --primary-dark: #1e293b;
+      --primary-soft: #e0e7ff;
+      --accent: #0284c7;
+      --accent-soft: #e0f2fe;
+      --success: #0d9488;
+      --success-soft: #ccfbf1;
+      --warning: #d97706;
+      --warning-soft: #fef3c7;
+      --shadow: rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", "PingFang TC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(8px);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 0.02em;
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 1.15rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--muted);
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .hero {
+      padding: 48px 0 32px;
+      background: linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 14px;
+    }
+
+    .hero-title {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+      font-weight: 900;
+      color: var(--primary-dark);
+      line-height: 1.3;
+    }
+
+    .hero-meta {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .callout {
+      padding: 20px 24px;
+      border-radius: var(--radius);
+      background: #ffffff;
+      border-left: 5px solid var(--accent);
+      box-shadow: 0 4px 16px var(--shadow);
+      font-size: 1.02rem;
+      color: #334155;
+      margin-bottom: 36px;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding: 36px 0 64px;
+    }
+
+    .section-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: 0 4px 20px var(--shadow);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-top: 0;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--primary-soft);
+      padding-bottom: 12px;
+    }
+
+    .sub-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 24px 0 10px;
+    }
+
+    .feature-box {
+      background: var(--panel-soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+
+    .feature-box.highlight {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+
+    .feature-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .dialogue-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--accent);
+      padding: 16px 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 14px 0;
+      font-style: italic;
+      color: #1e40af;
+    }
+
+    ul, ol {
+      padding-left: 24px;
+      margin: 12px 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 10px;
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      background: #1e40af;
+      transform: translateY(-2px);
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      background: #ffffff;
+      padding: 32px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 640px) {
+      .section-card { padding: 20px; }
+      .hero-title { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">🧮</span>
+        <span>數學來自生活</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">首頁</a></li>
+          <li><a href="curriculum.html" class="nav-link">108課綱中心</a></li>
+          <li><a href="list.html" class="nav-link">課程總覽</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">🧠 日新國小資優思維專題 ✕ 數學素養系列</div>
+      <h1 class="hero-title">數獨觀察、邏輯推理與決策思維教學完整指南</h1>
+      <div class="hero-meta">
+        授課設計：<strong>馮奇偉老師</strong>｜臺北市日新國小資優班｜對象：國小低年級（親師共學）至高年級資優探究
+      </div>
+      <div class="callout">
+        <strong>【核心理念】</strong> 數獨是一門深具魅力的嚴謹邏輯挑戰。本指南專注於將數獨的解題之美轉化為具體的素養教學歷程，引導學生從「只關注填滿盤面」深化為「有意識的思維建構」——培養<strong>「耐住性子觀察」、「系統化尋找規律」、「資訊量評估」與「在有限條件下做出最佳決策」</strong>的完整數學素養。
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container main-grid">
+
+    <!-- Section 1 -->
+    <article class="section-card">
+      <h2 class="section-title">一、 教學緣起與核心素養價值</h2>
+      
+      <div class="sub-title">1. 為什麼是數獨？純粹觀察與邏輯的載體</div>
+      <p>數獨最珍貴的教育價值，在於它<strong>「完全不需要繁雜的加減乘除四則運算」</strong>。學生不會被計算錯誤干擾，能將 100% 的認知資源投注在「觀察行、列、宮的約束條件」與「尋找規律」上。</p>
+      <p>在數學學習的長遠道路上，能<strong>「耐住性子去觀察、去尋找規律」</strong>，往往比單純算出算式答案更為關鍵。數獨正是訓練孩子專注力、耐心與邏輯演繹的最佳載體。</p>
+
+      <div class="sub-title">2. 超越單純填字，聚焦決策與思維歷程</div>
+      <p>許多數獨愛好者與專業玩家都能體會其背後深奧的演繹推論之美；然而對初接觸的孩子來說，若缺乏系統策略的引導，容易在遇到瓶頸時誤以為只能逐格碰運氣、甚至因挫折而放棄，或僅把焦點放在「把格子填滿」。本教學手稿的核心，是引導學童建立<strong>「有意識的觀察與決策思考」</strong>——學會評估盤面上哪裡的資訊最充分、線索最密集，在面對不確定時做出合乎邏輯的最佳嘗試，並能清楚口述「為什麼這一步必然是它」。</p>
+
+      <div class="sub-title">3. 現有教材與商業平台痛點</div>
+      <p>商業數獨平台（如 sudoku.com）通常設有「錯誤三次即強制跳出廣告」的機制，這會嚴重打斷學生的專注力與思考心流；且標準九宮格對初學低年級學生來說負擔過重，因此極需發展一套<strong>去廣告、重邏輯、兼具階梯化引導</strong>的專屬教學系統與網頁版工具。</p>
+    </article>
+
+    <!-- Section 2 -->
+    <article class="section-card">
+      <h2 class="section-title">二、 數位操作載體之優勢與雙重智慧對焦</h2>
+      <p>在教學實務上，建議優先採用<strong>「具備智慧對焦與註記功能之數位平台」</strong>而非傳統紙本，其核心介面設計優勢如下：</p>
+
+      <div class="feature-box">
+        <div class="feature-title">🎯 （1）點選「空白格子」時的十字交會對焦</div>
+        <p>當學生點擊任何一個空白處時，系統自動將該格所在的<strong>「直行」、「橫列」以及「所屬九宮格」</strong>同步以淺色（淺藍灰）高亮亮起。</p>
+        <p><strong>教學效益：</strong>學生不必用手指或尺在紙面上費力比對，視線立即被收斂至所有具備直接排斥約束的區域，一眼綜覽該格周圍已經出現了哪些數字，大幅降低搜尋排查的認知負擔。</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-title">💡 （2）點選「已有數字的格子」時的全盤同數連動亮起</div>
+        <p>當學生點選盤面上已有數字（例如點擊某個數字 8）時，除了該格所在的直行、橫列與九宮格變色外，盤面上<strong>「所有其他九宮格裡的同一個數字（全盤所有的 8）」都會同步被加深亮起（深藍色凸顯）</strong>。</p>
+        <p><strong>教學效益：</strong>這能幫助學生立刻看清該數字在全盤的分佈「射線」，直觀進行空間掃描與交叉阻斷，一眼看出哪一個九宮格還缺少這個數字、以及它唯一能放哪裡。</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-title">✏️ （3）筆記模式（思維外顯與候選數標記）</div>
+        <p>開啟鉛筆筆記功能（ON）後，學生可在格子內填寫小字號的候選數字（例如 1、3、6）。這將大腦工作記憶（Working Memory）的負擔外部化，讓推敲與刪去過程清晰可見，避免因害怕忘記或大腦超載而卡關。</p>
+      </div>
+    </article>
+
+    <!-- Section 3 -->
+    <article class="section-card">
+      <h2 class="section-title">三、 分齡學習進程與心理陪伴指引（親師共學手冊）</h2>
+      
+      <div class="sub-title">1. 低年級（二、三年級甚至學齡前）：重在焦點引領與安全感</div>
+      <ul>
+        <li><strong>專注力瓶頸：</strong>初次接觸標準九宮格時，學生往往需要花費將近一個小時，極易感到挫折或失去耐心。</li>
+        <li><strong>降階破冰策略：</strong>初期務必從<strong>「四宮格（4×4）」或「六宮格（6×6）」</strong>入門。格數少、規則單純，能讓孩子在專注力耗盡前順利破關，建立「我能自己解開」的強烈成就感。</li>
+        <li><strong>教學初期的介入藝術（切忌一開始頻問『為什麼』）：</strong>
+          <div class="feature-box highlight">
+            剛開始陪伴孩子時，大人的<strong>主動介入較多是絕對正常且必要的</strong>！孩子在尚未熟悉規則與操作、連「熟練」都還做不到的時候，根本無從去思考「為什麼」。若一開始就急著追問為什麼，孩子只會感到手足無措與壓力。<br><br>
+            此時大人要先扮演<strong>「眼睛的導航員」</strong>，主動幫孩子指出焦點（例如指著說：<em>「你看這裡、老師想看這一格，我們一起看這一直行」</em>），借大人的視野為孩子搭建視覺鷹架。
+          </div>
+        </li>
+        <li><strong>陪伴心態（首席玩伴）：</strong>大人應放下身段，不當發號施令的考官，而是扮演玩伴。同理孩子面對陌生規則時的慌亂感。給予充足的摸索時間，一次只給一個清楚的焦點。</li>
+        <li><strong>前置暖身活動：</strong>可搭配「一筆畫遊戲」作為低年級空間想像與路徑規劃的前置訓練，啟發空間直覺。</li>
+      </ul>
+
+      <div class="sub-title">2. 中高年級（四、五年級與資優學生）：從熟練走向策略反思</div>
+      <ul>
+        <li><strong>初次嘗試：</strong>正常情況下，初次嘗試標準題目約需 30 到 40 分鐘。</li>
+        <li><strong>熟練與加速：</strong>隨著能力建構與手感提升，完成時間可顯著縮短至 15 分鐘，熟練者甚至可進入 10 分鐘以內。</li>
+        <li><strong>進階升級與反思啟動：</strong>當學生達到 10～15 分鐘的熟練度時，大腦才有認知餘裕去探討高階策略。此時老師才能開始退居幕後，啟動「你為什麼先選這裡」的後設認知提問。</li>
+      </ul>
+    </article>
+
+    <!-- Section 4 -->
+    <article class="section-card">
+      <h2 class="section-title">四、 邏輯推理與觀察思考之階梯式教學手稿</h2>
+
+      <div class="feature-box">
+        <span class="step-badge">第 1 階</span>
+        <h3 style="margin: 8px 0 4px; color: var(--primary);">局部最簡突破口——從「二選一」開始</h3>
+        <p><strong>【引導目標】</strong>由大人主動指引焦點，讓學生在無挫折感的環境下，親自體驗「交叉排除」的威力。</p>
+        <p><strong>步驟說明：</strong>大人先幫學生在盤面上尋找「只剩下 1 到 2 個空格」的行、列或九宮格，將視線聚焦。</p>
+        <p><strong>實戰情境範例：</strong>某個九宮格中已經填入了 4、7、9、6、2、5、8，由 1 到 9 數一數，確認僅剩下兩個空格，缺少的數字為「1」和「3」。</p>
+        <div class="dialogue-box">
+          焦點指引語（引導觀察而非質問）：<br>
+          「我們一起看深藍色的這一格，如果填 1 的話，順著直行往上看，會發生什麼事？」
+        </div>
+        <p><strong>邏輯推演：</strong>學生在指引下發現該直行上方已經存在一個 1，若此格填 1 則同一直行將出現兩個 1，產生矛盾衝突。因此，此格<strong>「別無選擇，必然只能填 3」</strong>；剩下那一格則必然為 1。</p>
+      </div>
+
+      <div class="feature-box">
+        <span class="step-badge">第 2 階</span>
+        <h3 style="margin: 8px 0 4px; color: var(--primary);">全局視野與突破口評估——「為什麼先選這裡？」</h3>
+        <p><strong>【引導目標】</strong>當學生操作熟練後，引導其從「被動看提示」提升至「主動評估線索密度」的戰略高度。</p>
+        <p><strong>提問時機點：</strong>務必在學生已經熟悉規則、能流暢解題之後，才拋出此類策略性提問，避免在起步階段造成認知過載。</p>
+        <div class="dialogue-box">
+          進階關鍵提問：<br>
+          「畫面上同時有兩個九宮格都只缺 3 個數字，你覺得先解哪一個比較容易？從哪裡看出來的？」
+        </div>
+        <p><strong>引導觀察外部線索：</strong>引導學生將視線跳脫單一九宮格，向外觀察穿過這三個空格的直行與橫列。如果某個九宮格周圍的直行橫列已知數字越多，能用來做交叉排除的「射線線索」就越豐富，那它就是更容易突破的最佳破局點！</p>
+      </div>
+
+      <div class="feature-box">
+        <span class="step-badge">第 3 階</span>
+        <h3 style="margin: 8px 0 4px; color: var(--primary);">善用筆記註記與「基於現有線索的合理猜測」</h3>
+        <p><strong>【引導目標】</strong>克服害怕犯錯的完美主義，學會「在資訊有限下做最佳決策」。</p>
+        <p><strong>心理建設（鼓勵合理大膽嘗試）：</strong>面對剛接觸的學生，老師應鼓勵：<em>「只要依照目前的線索看起來是合邏輯的，就可以大膽猜猜看、填填看！」</em></p>
+        <p><strong>維持思考動能：</strong>如果因為害怕出錯而不敢下筆，思考節奏會完全停滯，挫折感與耗時都會倍增。透過「合理嘗試 ➔ 檢驗是否產生衝突 ➔ 善用復原或刪除」，學生學會的是：<strong>「在現有知識與有限情報下，勇敢做出當下最佳的判斷」</strong>，這正是真實世界中解決問題的最高價值！</p>
+      </div>
+
+      <div class="feature-box">
+        <span class="step-badge">第 4 階</span>
+        <h3 style="margin: 8px 0 4px; color: var(--primary);">進階資優自主探究</h3>
+        <p>對於高年級或資優學生，可進一步延伸至「區塊排除法（宮線指向 Locked Candidates）」與「數對互斥（Naked / Hidden Pairs）」等高階推理技巧。本階段建議採「個別指導」或「學生自主研究」，讓具備高度興趣的學生自主建構高階邏輯體系。</p>
+      </div>
+    </article>
+
+    <!-- Section 5 -->
+    <article class="section-card">
+      <h2 class="section-title">五、 課堂實踐三叮嚀與軟體願景</h2>
+      <ol>
+        <li><strong>動態調整介入程度（先導引焦點，熟練後才問為什麼）：</strong><br>
+        初期大人主動介入、幫忙指明焦點是搭建鷹架的關鍵；切忌在孩子尚未熟悉操作時頻頻追問為什麼。等到手感熟練後，再將主導權交還給孩子，啟動策略反思。</li>
+        <li><strong>容許合理猜測（把嘗試視為科學假設）：</strong><br>
+        把「猜測」定義為「基於手邊現有線索的最佳假設」，讓學生在試誤與驗證中建立自信與彈性思維。</li>
+        <li><strong>關注耐心與觀察力：</strong><br>
+        當孩子解題卡關時，讚美他們「耐住性子仔細觀察」的態度，而非只看解題速度。</li>
+      </ol>
+
+      <div class="feature-box highlight" style="margin-top: 24px;">
+        <strong>🚀 軟體與工具願景：</strong><br>
+        未來可進一步在網站中開發專屬的「數獨思維訓練工具」——內建 4×4、6×6 入門棋盤，乾淨零廣告，並配備雙重智慧對焦與思維提示機制，讓每位孩子都能在友善無負擔的環境中享受邏輯推演的樂趣。
+      </div>
+
+      <div style="text-align: center; margin-top: 32px;">
+        <a href="curriculum.html" class="btn">🔍 前往 108 課綱查詢中心</a>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>數學來自生活・108 課綱數學素養教學平台</p>
+      <p style="font-size: 0.82rem; margin: 4px 0 0;">本手稿由 馮奇偉老師 講述原創，專供數學教育與親師共學思維訓練使用。</p>
+    </div>
+  </footer>
+
+</body>
+</html>
