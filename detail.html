@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="教材詳情頁：課綱連結、教學設計、來源資訊與授權規範。" />
+  <title>教材詳情｜數學來自生活</title>
+  <style>
+    :root {
+      --bg: #f3f6fb;
+      --panel: #ffffff;
+      --panel-soft: #f7f9fc;
+      --line: #dfe7f2;
+      --text: #1f2937;
+      --muted: #5f6f82;
+      --primary: #2d4d9c;
+      --primary-dark: #1d3876;
+      --primary-soft: #edf4ff;
+      --success: #2d8f6d;
+      --success-soft: #eafaf4;
+      --warning: #b96d1d;
+      --warning-soft: #fff3e4;
+      --shadow: rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Microsoft JhengHei", "PingFang TC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(8px);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    .top-nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .top-nav a {
+      font-weight: 700;
+      color: var(--text);
+      padding: 8px 0;
+    }
+
+    .top-nav a:hover {
+      color: var(--primary);
+    }
+
+    .page-shell {
+      padding: 42px 0 72px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #edf4ff 0%, #f9fbff 100%);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px 28px 22px;
+      box-shadow: 0 10px 26px var(--shadow);
+    }
+
+    .breadcrumb {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+    }
+
+    .breadcrumb a {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin: 0 0 12px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      border: 1px solid #d7e5ff;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      letter-spacing: -0.05em;
+      font-size: clamp(2.1rem, 4vw, 3.4rem);
+      line-height: 1.1;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #f3f4f6;
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(280px, 0.7fr);
+      gap: 24px;
+      margin-top: 28px;
+    }
+
+    .main-article,
+    .side-panel,
+    .related-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.03);
+    }
+
+    .main-article {
+      padding: 26px 24px;
+    }
+
+    .section-block + .section-block {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-block h2 {
+      margin: 0 0 12px;
+      font-size: 1.4rem;
+      letter-spacing: -0.03em;
+    }
+
+    .section-block p,
+    .section-block li {
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .section-block ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+
+    .source-box {
+      background: var(--panel-soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .source-box p {
+      margin: 0 0 8px;
+    }
+
+    .side-panel {
+      padding: 22px 20px;
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+    }
+
+    .side-panel h3 {
+      margin: 0 0 16px;
+      font-size: 1.15rem;
+    }
+
+    .fact-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .fact-list li {
+      display: grid;
+      gap: 4px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .fact-list li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .fact-label {
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .fact-value {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .warning-box {
+      margin-top: 18px;
+      background: var(--warning-soft);
+      border: 1px solid #f3d6a2;
+      border-radius: 14px;
+      padding: 16px;
+      color: var(--warning);
+      font-weight: 700;
+    }
+
+    .related {
+      margin-top: 36px;
+    }
+
+    .related-header {
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+    }
+
+    .related-header h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 2vw, 2.3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .related-card {
+      padding: 20px;
+    }
+
+    .related-card h3 {
+      margin: 10px 0 8px;
+      font-size: 1.2rem;
+      line-height: 1.4;
+    }
+
+    .related-card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .related-card a {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .footer {
+      padding: 24px 0 40px;
+      text-align: center;
+      font-weight: 700;
+      color: var(--primary-dark);
+      background: #eef4ff;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 980px) {
+      .content-grid { grid-template-columns: 1fr; }
+      .side-panel { position: static; }
+      .related-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .topbar-inner { min-height: 68px; }
+      .top-nav { gap: 10px; }
+      .top-nav a { font-size: 0.8rem; }
+      .related-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="index.html"><span class="brand-mark">數</span><span>數學課綱與教學設計平台</span></a>
+      <nav class="top-nav" aria-label="主要導覽">
+        <a href="index.html">首頁</a>
+        <a href="list.html">教材列表</a>
+        <a href="detail.html">詳情範例</a>
+        <a href="index.html#curriculum">12年國教課綱</a>
+        <a href="index.html#teaching">一般教學設計</a>
+        <a href="index.html#student-work">學生作品</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div class="container">
+      <section class="hero">
+        <div class="breadcrumb"><a href="index.html">首頁</a> / <a href="list.html">教材列表</a> / 詳情</div>
+        <p class="eyebrow">教材詳情範例</p>
+        <h1>正負數與數線：從位置與變化理解數</h1>
+        <p class="lead">以樓層、海拔與溫度等生活情境為起點，引導學生理解正負數、數線與數值變化的關係。</p>
+        <div class="meta-row">
+          <span class="pill">七年級</span>
+          <span class="pill">N 數與量</span>
+          <span class="pill">12年國教課綱</span>
+          <span class="pill">生活情境</span>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <article class="main-article">
+          <div class="section-block">
+            <h2>設計意圖</h2>
+            <p>本資源的重點不是直接提供答案，而是幫助教師用更清楚的方式帶學生從熟悉的生活經驗進入數學表徵。透過樓層、海拔、溫度與時間差異等情境，讓學生理解「0」不是起點，而是參照點。</p>
+          </div>
+
+          <div class="section-block">
+            <h2>教學重點</h2>
+            <ul>
+              <li>從生活情境中辨識正數、負數與零的意義。</li>
+              <li>能用數線表示數的大小與順序關係。</li>
+              <li>比較不同情境中的變化量與方向。</li>
+              <li>建立數與圖像之間的連結，培養推理與說明能力。</li>
+            </ul>
+          </div>
+
+          <div class="section-block">
+            <h2>課綱連結</h2>
+            <div class="source-box">
+              <p><strong>學習內容：</strong>數與量；整數與分數的比較、加減與數線表徵。</p>
+              <p><strong>學習表現：</strong>描述與解釋生活情境中的數量關係，並能以文字、數學符號與圖像進行表達。</p>
+            </div>
+          </div>
+
+          <div class="section-block">
+            <h2>來源與使用說明</h2>
+            <div class="source-box">
+              <p><strong>資料來源：</strong>範例性教材整理，依教師使用需求概述，目的在於提供教學思路與設計參考。</p>
+              <p><strong>使用方式：</strong>可作為授課前討論、學習單設計與課後回饋的參考素材；修改時請保留來源與適用範圍說明。</p>
+              <p><strong>公開欄位：</strong>若作為校內或公開展示，需明確標註資料來源、修改內容與授權層級。</p>
+            </div>
+          </div>
+        </article>
+
+        <aside class="side-panel" aria-label="教材資訊">
+          <h3>教材資訊</h3>
+          <ul class="fact-list">
+            <li>
+              <span class="fact-label">適用年級</span>
+              <span class="fact-value">七年級</span>
+            </li>
+            <li>
+              <span class="fact-label">主題</span>
+              <span class="fact-value">N 數與量</span>
+            </li>
+            <li>
+              <span class="fact-label">教材類型</span>
+              <span class="fact-value">12年課綱示例</span>
+            </li>
+            <li>
+              <span class="fact-label">主要工具</span>
+              <span class="fact-value">數線、生活照片、討論單</span>
+            </li>
+          </ul>
+          <div class="warning-box">公開展示前，應確認是否已取得學生同意，並保留來源與匿名原則。</div>
+        </aside>
+      </section>
+
+      <section class="related" aria-label="相關教材">
+        <div class="related-header">
+          <h2>相關教材</h2>
+          <a href="list.html" style="color: var(--primary); font-weight: 800;">查看全部</a>
+        </div>
+
+        <div class="related-grid">
+          <article class="related-card">
+            <span class="pill">教學設計</span>
+            <h3>班級資料的討論與呈現</h3>
+            <p>透過班級真實資料整理圖表，讓學生練習提出問題與討論資料意義。</p>
+            <a href="list.html">閱讀教材</a>
+          </article>
+
+          <article class="related-card">
+            <span class="pill">學術與實務</span>
+            <h3>以建構主義重新思考代數概念教學</h3>
+            <p>從學術觀點看見設計限制與轉化方向，協助教師修正教學策略。</p>
+            <a href="list.html">閱讀教材</a>
+          </article>
+
+          <article class="related-card">
+            <span class="pill">學生作品</span>
+            <h3>羅馬數字與阿拉伯數字的轉換</h3>
+            <p>學生用對照與比較方式理解數字轉換與符號規則。</p>
+            <a href="list.html">閱讀教材</a>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">數學來自生活，學習回到生活。｜教材詳情範例</footer>
+</body>
+</html>

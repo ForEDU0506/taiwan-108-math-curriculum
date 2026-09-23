@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="數學教材列表：依年級、主題與學習目標快速查找適合的課綱與教學設計資源。" />
+  <title>教材列表｜數學來自生活</title>
+  <style>
+    :root {
+      --bg: #f3f6fb;
+      --panel: #ffffff;
+      --panel-soft: #f7f9fc;
+      --line: #dfe7f2;
+      --text: #1f2937;
+      --muted: #5f6f82;
+      --primary: #2d4d9c;
+      --primary-dark: #1d3876;
+      --primary-soft: #edf4ff;
+      --accent: #f0b429;
+      --success: #2d8f6d;
+      --success-soft: #eafaf4;
+      --warning: #b96d1d;
+      --warning-soft: #fff3e4;
+      --shadow: rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Microsoft JhengHei", "PingFang TC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    button, input, select { font: inherit; }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(8px);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    .top-nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .top-nav a {
+      font-weight: 700;
+      color: var(--text);
+      padding: 8px 0;
+      position: relative;
+    }
+
+    .top-nav a:hover {
+      color: var(--primary);
+    }
+
+    .page-shell {
+      padding: 42px 0 72px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #edf4ff 0%, #f9fbff 100%);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px 28px 22px;
+      box-shadow: 0 10px 26px var(--shadow);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin: 0 0 12px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      border: 1px solid #d7e5ff;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      letter-spacing: -0.05em;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.1;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    .filter-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 160px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 9px 12px;
+      color: var(--muted);
+    }
+
+    .filter-box select {
+      border: none;
+      background: transparent;
+      outline: none;
+      color: var(--text);
+      font-weight: 700;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .section-header {
+      margin-top: 42px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 2vw, 2.4rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-header .note {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .resource-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.03);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .content-type {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+
+    .teaching-type {
+      color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .academic-type {
+      color: #5b2d6e;
+      background: #f4eaff;
+    }
+
+    .life-type {
+      color: var(--success);
+      background: var(--success-soft);
+    }
+
+    .resource-card h3 {
+      margin: 0;
+      font-size: 1.35rem;
+      line-height: 1.35;
+    }
+
+    .resource-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tags span,
+    .resource-meta {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      background: #f3f4f6;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .meta-line {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .resource-meta {
+      background: #f5f7fb;
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .detail-link {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .footer {
+      padding: 24px 0 40px;
+      text-align: center;
+      font-weight: 700;
+      color: var(--primary-dark);
+      background: #eef4ff;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 900px) {
+      .card-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .topbar-inner { min-height: 68px; }
+      .top-nav { gap: 10px; }
+      .top-nav a { font-size: 0.8rem; }
+      .card-grid { grid-template-columns: 1fr; }
+      .section-header { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="index.html"><span class="brand-mark">數</span><span>數學課綱與教學設計平台</span></a>
+      <nav class="top-nav" aria-label="主要導覽">
+        <a href="index.html">首頁</a>
+        <a href="list.html">教材列表</a>
+        <a href="detail.html">詳情範例</a>
+        <a href="index.html#curriculum">12年國教課綱</a>
+        <a href="index.html#teaching">一般教學設計</a>
+        <a href="index.html#student-work">學生作品</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div class="container">
+      <section class="hero">
+        <p class="eyebrow">教師可直接使用的內容資源</p>
+        <h1>教材列表</h1>
+        <p class="lead">依課綱、年級、主題與教學目的分類，讓教師在教學現場快速找到適合的素材與參考資源。</p>
+
+        <div class="filter-bar" aria-label="內容篩選">
+          <label class="filter-box">
+            <span>年級</span>
+            <select aria-label="選擇年級">
+              <option>全部</option>
+              <option>四年級</option>
+              <option>七年級</option>
+              <option>八年級</option>
+            </select>
+          </label>
+          <label class="filter-box">
+            <span>主題</span>
+            <select aria-label="選擇主題">
+              <option>全部</option>
+              <option>N 數與量</option>
+              <option>A 代數</option>
+              <option>D 資料與不確定性</option>
+            </select>
+          </label>
+          <label class="filter-box">
+            <span>類型</span>
+            <select aria-label="選擇內容類型">
+              <option>全部</option>
+              <option>課綱素材</option>
+              <option>教學設計</option>
+              <option>學生作品</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <div class="section-header">
+        <h2>相關資源</h2>
+        <span class="note">共 6 筆內容</span>
+      </div>
+
+      <section class="card-grid" aria-label="教材列表">
+        <article class="resource-card">
+          <span class="content-type teaching-type">課綱素材</span>
+          <h3>正負數與數線：從位置與變化理解數</h3>
+          <p>先從樓層、海拔與溫度等生活情境出發，形成正負數與數線的直觀理解。</p>
+          <div class="tags"><span>七年級</span><span>N 數與量</span></div>
+          <div class="meta-line">
+            <span class="resource-meta">12年國教課綱</span>
+            <a class="detail-link" href="detail.html">查看詳情</a>
+          </div>
+        </article>
+
+        <article class="resource-card">
+          <span class="content-type teaching-type">教學設計</span>
+          <h3>班級資料的討論與呈現</h3>
+          <p>利用班級真實資料整理圖表，讓學生練習提出問題、比較與說明數據。</p>
+          <div class="tags"><span>七年級</span><span>D 資料與不確定性</span></div>
+          <div class="meta-line">
+            <span class="resource-meta">生活資料</span>
+            <a class="detail-link" href="detail.html">查看詳情</a>
+          </div>
+        </article>
+
+        <article class="resource-card">
+          <span class="content-type academic-type">學術與實務</span>
+          <h3>以建構主義重新思考代數概念教學</h3>
+          <p>從理論轉化到現場設計，討論代數課程如何回到學生的理解與表達。</p>
+          <div class="tags"><span>八年級</span><span>A 代數</span></div>
+          <div class="meta-line">
+            <span class="resource-meta">研究取向</span>
+            <a class="detail-link" href="detail.html">查看詳情</a>
+          </div>
+        </article>
+
+        <article class="resource-card">
+          <span class="content-type teaching-type">課綱素材</span>
+          <h3>代數關係與生活問題</h3>
+          <p>從家庭支出與用電資料建立關係式，幫助學生理解變數與關係。</p>
+          <div class="tags"><span>八年級</span><span>A 代數</span></div>
+          <div class="meta-line">
+            <span class="resource-meta">生活情境</span>
+            <a class="detail-link" href="detail.html">查看詳情</a>
+          </div>
+        </article>
+
+        <article class="resource-card">
+          <span class="content-type life-type">學生作品</span>
+          <h3>羅馬數字與阿拉伯數字的轉換</h3>
+          <p>學生透過對照與比較，形成數字系統與記號規則的理解，並表達其思考過程。</p>
+          <div class="tags"><span>七年級</span><span>數字表徵</span></div>
+          <div class="meta-line">
+            <span class="resource-meta">作品展示</span>
+            <a class="detail-link" href="detail.html">查看詳情</a>
+          </div>
+        </article>
+
+        <article class="resource-card">
+          <span class="content-type life-type">學生作品</span>
+          <h3>生活中的代數問題</h3>
+          <p>學生將生活情境抽象成關係式，藉此說明變數如何描述真實情況。</p>
+          <div class="tags"><span>八年級</span><span>代數</span></div>
+          <div class="meta-line">
+            <span class="resource-meta">寫作與解題</span>
+            <a class="detail-link" href="detail.html">查看詳情</a>
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">數學來自生活，學習回到生活。｜教材列表</footer>
+</body>
+</html>
