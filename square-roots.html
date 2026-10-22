@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="臺灣 108 課綱國中數學：二次方根（Square Roots）互動式探究學習地圖與 AI 伴學工作台。" />
+  <title>國中數學：二次方根 AI 伴學工作台｜臺灣 108 課綱探究學習</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- KaTeX for High-Performance Math Formula Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --panel-soft: #f1f5f9;
+      --border: #e2e8f0;
+      --border-focus: #6366f1;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: #4f46e5;
+      --primary-dark: #3730a3;
+      --primary-soft: #eef2ff;
+      --accent-green: #10b981;
+      --accent-green-soft: #ecfdf5;
+      --accent-amber: #d97706;
+      --accent-amber-soft: #fffbeb;
+      --accent-purple: #8b5cf6;
+      --accent-purple-soft: #f5f3ff;
+      --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* 頂部導航列 */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+      padding: 0 24px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 800;
+      font-size: 1.15rem;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      font-weight: 900;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    }
+
+    .top-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+
+    .top-nav a:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    /* 主架構容器 */
+    .app-shell {
+      display: flex;
+      max-width: 1400px;
+      margin: 0 auto;
+      min-height: calc(100vh - 68px);
+    }
+
+    /* 左側 8 大階段導航 (iPad 平板優化) */
+    .stage-sidebar {
+      width: 320px;
+      flex-shrink: 0;
+      background: var(--panel);
+      border-right: 1px solid var(--border);
+      padding: 24px 16px;
+      position: sticky;
+      top: 68px;
+      height: calc(100vh - 68px);
+      overflow-y: auto;
+    }
+
+    .sidebar-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 800;
+      margin-bottom: 14px;
+      padding-left: 8px;
+    }
+
+    .stage-item {
+      display: block;
+      padding: 12px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.92rem;
+      margin-bottom: 8px;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .stage-item:hover {
+      background: var(--panel-soft);
+      border-color: var(--border);
+    }
+
+    .stage-item.active {
+      background: var(--primary-soft);
+      color: var(--primary);
+      border-color: rgba(79, 70, 229, 0.3);
+    }
+
+    .stage-num {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      border-radius: 6px;
+      background: rgba(0, 0, 0, 0.06);
+      font-size: 0.78rem;
+      margin-right: 8px;
+      font-weight: 800;
+    }
+
+    .stage-item.active .stage-num {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* 右側主內容區 */
+    .main-content {
+      flex: 1;
+      padding: 36px 40px 80px;
+      min-width: 0;
+    }
+
+    /* Banner 區域 */
+    .hero-banner {
+      background: linear-gradient(135deg, #eef2ff 0%, #faf5ff 50%, #f0fdfa 100%);
+      border: 1px solid #e0e7ff;
+      border-radius: var(--radius);
+      padding: 32px 36px;
+      margin-bottom: 32px;
+      position: relative;
+      box-shadow: var(--shadow);
+    }
+
+    .badge-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      background: #fff;
+      border: 1px solid #c7d2fe;
+      border-radius: 999px;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.78rem;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      color: #1e1b4b;
+    }
+
+    .hero-subtitle {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 720px;
+    }
+
+    /* 內容卡片 */
+    .section-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-card h2 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #0f172a;
+      border-bottom: 2px solid var(--panel-soft);
+      padding-bottom: 12px;
+    }
+
+    /* 概念表格 */
+    .concept-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 18px 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .concept-table th, .concept-table td {
+      padding: 12px 18px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      font-size: 1rem;
+    }
+
+    .concept-table th {
+      background: var(--panel-soft);
+      font-weight: 800;
+      color: var(--muted);
+    }
+
+    .concept-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* 思考階梯盒子 (摺疊卡片) */
+    .thinking-box {
+      background: #fafafa;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 16px 0;
+    }
+
+    .thinking-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .thinking-title {
+      font-weight: 800;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1rem;
+    }
+
+    .toggle-hint {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .thinking-body {
+      display: none;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border);
+      color: #334155;
+    }
+
+    .thinking-body.show {
+      display: block;
+    }
+
+    /* 迷思警示框 */
+    .trap-alert {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 16px 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 20px 0;
+      color: #92400e;
+    }
+
+    .trap-title {
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    /* 練習題目卡 */
+    .exercise-item {
+      background: var(--panel-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+    }
+
+    .exercise-title {
+      font-weight: 800;
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      color: #1e293b;
+    }
+
+    .exercise-input-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .answer-input {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 1rem;
+      width: 220px;
+      outline: none;
+      transition: all 0.2s;
+      background: #fff;
+    }
+
+    .answer-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    .btn-check {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-check:hover {
+      background: var(--primary-dark);
+    }
+
+    .feedback-msg {
+      margin-top: 10px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      display: none;
+    }
+
+    .feedback-msg.correct {
+      display: block;
+      color: var(--accent-green);
+    }
+
+    .feedback-msg.wrong {
+      display: block;
+      color: #dc2626;
+    }
+
+    /* 🚀 AI 專屬發射鈕群組 */
+    .ai-action-bar {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .ai-bar-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .btn-ai {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-chatgpt {
+      background: #10a37f;
+      color: #fff;
+      border: 1px solid #10a37f;
+    }
+
+    .btn-chatgpt:hover {
+      background: #0e8c6d;
+    }
+
+    .btn-gemini {
+      background: #1a73e8;
+      color: #fff;
+      border: 1px solid #1a73e8;
+    }
+
+    .btn-gemini:hover {
+      background: #1557b0;
+    }
+
+    .btn-copy-prompt {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-copy-prompt:hover {
+      background: var(--panel-soft);
+      border-color: #cbd5e1;
+    }
+
+    /* Toast 通知 */
+    .toast-msg {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #1e293b;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      z-index: 1000;
+      display: none;
+      animation: fadeIn 0.3s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 手機與平板適應 */
+    @media (max-width: 900px) {
+      .stage-sidebar { display: none; }
+      .main-content { padding: 20px 16px; }
+      .hero-title { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 頂部導航 -->
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <div class="brand-mark">根</div>
+      <div>
+        <span>國中數學：二次方根 AI 伴學工作台</span>
+      </div>
+    </a>
+    <nav class="top-nav">
+      <a href="index.html">返回首頁</a>
+      <a href="curriculum.html">課綱查詢</a>
+      <a href="#exercises" style="background:var(--primary); color:#fff; border-color:var(--primary);">🎯 開始練習</a>
+    </nav>
+  </header>
+
+  <!-- 主內容佈局 -->
+  <div class="app-shell">
+    
+    <!-- 左側 8 大階段導航選單 -->
+    <aside class="stage-sidebar">
+      <div class="sidebar-title">二次方根 8 階段探究地圖</div>
+      <a href="#stage1" class="stage-item active"><span class="stage-num">1</span>幾何引入與學習動機</a>
+      <a href="#stage2" class="stage-item"><span class="stage-num">2</span>符號定義與基本性質</a>
+      <a href="#stage3" class="stage-item"><span class="stage-num">3</span>完全平方數與根式化簡</a>
+      <a href="#stage4" class="stage-item"><span class="stage-num">4</span>數值估算與十分逼近法</a>
+      <a href="#stage5" class="stage-item"><span class="stage-num">5</span>根式乘除與單項有理化</a>
+      <a href="#stage6" class="stage-item"><span class="stage-num">6</span>同類根式與加減運算</a>
+      <a href="#stage7" class="stage-item"><span class="stage-num">7</span>乘法公式與雙項有理化</a>
+      <a href="#stage8" class="stage-item"><span class="stage-num">8</span>綜合應用與評量界線</a>
+    </aside>
+
+    <!-- 右側學習主頁 -->
+    <main class="main-content">
+      
+      <!-- 頂部 Hero Banner -->
+      <div class="hero-banner">
+        <div class="badge-tag">📐 108 課綱國二數學核心單元</div>
+        <h1 class="hero-title">階段 1：幾何引入與學習動機（建立數感與直觀）</h1>
+        <p class="hero-subtitle">
+          從生活與幾何正方形的「邊長」與「面積」出發，理解為什麼數學家需要創造根號符號 $\sqrt{\quad}$，並學會運用自己的 ChatGPT 或學校 Gemini 一對一啟發解題！
+        </p>
+      </div>
+
+      <!-- 核心概念導覽 -->
+      <section class="section-card">
+        <h2>🧭 一、 核心概念引導：正方形的「邊長」與「面積」</h2>
+        <p>在國小與國一，我們學過正方形面積公式：$$\text{面積} = \text{邊長} \times \text{邊長} = \text{邊長}^2$$</p>
+        
+        <table class="concept-table">
+          <thead>
+            <tr>
+              <th>正方形邊長</th>
+              <th>1</th>
+              <th>2</th>
+              <th>3</th>
+              <th>4</th>
+              <th>5</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>正方形面積</strong></td>
+              <td>$1^2 = 1$</td>
+              <td>$2^2 = 4$</td>
+              <td>$3^2 = 9$</td>
+              <td>$4^2 = 16$</td>
+              <td>$5^2 = 25$</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="margin-top: 14px;">反過來思考：如果已知一個正方形的<strong>面積</strong>，你能找出它的<strong>邊長</strong>嗎？</p>
+        <ul style="margin: 10px 0 10px 24px; color: var(--muted);">
+          <li>若面積為 $1$，邊長是 $1$（因為 $1 \times 1 = 1$）</li>
+          <li>若面積為 $4$，邊長是 $2$（因為 $2 \times 2 = 4$）</li>
+          <li>若面積為 $9$，邊長是 $3$（因為 $3 \times 3 = 9$）</li>
+        </ul>
+
+        <!-- 思考難題 -->
+        <div class="thinking-box">
+          <div class="thinking-header" onclick="toggleThinking('think1')">
+            <div class="thinking-title">🤔 思考難題：面積為 2 的正方形，邊長到底是多少？</div>
+            <div class="toggle-hint" id="hint-think1">點擊展開思考階梯 ▾</div>
+          </div>
+          <div class="thinking-body" id="think1">
+            <p><strong>1. 它是整數嗎？</strong></p>
+            <p>因為 $1^2 = 1$（太小），而 $2^2 = 4$（太大）。所以這個邊長必定介於 $1$ 與 $2$ 之間，<strong>絕不是整數</strong>！</p>
+            <p style="margin-top: 8px;"><strong>2. 它是有限小數嗎？</strong></p>
+            <ul style="margin-left: 20px;">
+              <li>試算 $1.4 \times 1.4 = 1.96$（小於 2）</li>
+              <li>試算 $1.5 \times 1.5 = 2.25$（大於 2）</li>
+              <li>再逼近 $1.41 \times 1.41 = 1.9881$</li>
+              <li>數學家證明：這個數字小數點後無窮無盡，且<strong>不循環（無理數）</strong>，無法用有限數字寫出！</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 根號定義 -->
+      <section class="section-card">
+        <h2>✨ 二、 數學家的智慧：根號符號 $\sqrt{\quad}$ 的誕生</h2>
+        <p>既然無法用有限小數寫完，我們就必須創造一個新符號：</p>
+        
+        <div style="background: var(--primary-soft); border-left: 4px solid var(--primary); padding: 16px 20px; border-radius: 0 12px 12px 0; margin: 16px 0;">
+          <strong style="color: var(--primary-dark); font-size: 1.05rem;">🎯 根號的定義：</strong><br>
+          我們用符號 <strong>$\sqrt{2}$</strong>（讀作：根號 2），來代表「<strong>面積為 2 的正方形邊長</strong>」。
+        </div>
+
+        <p>因為 $\sqrt{2}$ 是面積為 2 的正方形邊長，依照正方形面積公式：</p>
+        <p style="text-align: center; font-size: 1.2rem; font-weight: 800; color: var(--primary-dark); margin: 12px 0;">
+          $$\sqrt{2} \times \sqrt{2} = 2 \quad \text{或寫成} \quad (\sqrt{2})^2 = 2$$
+        </p>
+
+        <!-- 迷思陷阱 -->
+        <div class="trap-alert">
+          <div class="trap-title">⚠️ 注意！最常見直覺迷思陷阱：</div>
+          <div>❌ <strong>錯誤直覺</strong>：誤以為 $\sqrt{2} = 1$ 或把根號當成除法 $\sqrt{2} = 2 \div 2 = 1$。</div>
+          <div style="margin-top: 4px;">💡 <strong>正確心態</strong>：根號絕不是「除以 2」！$1 \times 1 = 1 \ne 2$。根號是求「哪一個正數自己乘自己會等於目標」。</div>
+        </div>
+      </section>
+
+      <!-- 實戰梯度演練區 -->
+      <section class="section-card" id="exercises">
+        <h2>🎯 三、 實戰演練與 AI 專屬伴學助教</h2>
+        <p style="color: var(--muted); margin-bottom: 20px;">
+          請親自動筆算算看！遇到不會算的題目，點擊下方的 <strong>【呼叫 我的 ChatGPT】</strong> 或 <strong>【呼叫 學校 Gemini】</strong>，AI 會以蘇格拉底提問法一步步引導你思考，絕不直接爆雷答案！
+        </p>
+
+        <!-- 練習題 1 -->
+        <div class="exercise-item" id="ex1">
+          <div class="exercise-title">題目 1：有一張正方形地毯面積為 15 平方公尺，請問它的邊長是多少公尺？</div>
+          <div class="exercise-input-row">
+            <input type="text" class="answer-input" id="ans1" placeholder="輸入答案 (例如: 根號15)" />
+            <button class="btn-check" onclick="checkAnswer('ans1', ['根號15', 'sqrt(15)', '√15'], 'fb1')">驗證答案</button>
+          </div>
+          <div class="feedback-msg" id="fb1"></div>
+
+          <!-- AI 發射鈕 -->
+          <div class="ai-action-bar">
+            <span class="ai-bar-label">🤖 本題專屬 AI 家教引導：</span>
+            <a class="btn-ai btn-chatgpt" href="#" onclick="launchAI('chatgpt', '階段1 題目1', '有一張正方形地毯面積為 15 平方公尺，請問它的邊長是多少公尺？')">🟢 在我的 ChatGPT 啟動伴學</a>
+            <a class="btn-ai btn-gemini" href="#" onclick="launchAI('gemini', '階段1 題目1', '有一張正方形地毯面積為 15 平方公尺，請問它的邊長是多少公尺？')">🔵 在學校 Gemini 啟動伴學</a>
+            <button class="btn-ai btn-copy-prompt" onclick="copyPrompt('階段1 題目1', '有一張正方形地毯面積為 15 平方公尺，請問它的邊長是多少公尺？')">📋 複製提示咒語</button>
+          </div>
+        </div>
+
+        <!-- 練習題 2 -->
+        <div class="exercise-item" id="ex2">
+          <div class="exercise-title">題目 2：計算 $(\sqrt{19})^2$ 的數值是多少？</div>
+          <div class="exercise-input-row">
+            <input type="text" class="answer-input" id="ans2" placeholder="輸入數值答案" />
+            <button class="btn-check" onclick="checkAnswer('ans2', ['19'], 'fb2')">驗證答案</button>
+          </div>
+          <div class="feedback-msg" id="fb2"></div>
+
+          <!-- AI 發射鈕 -->
+          <div class="ai-action-bar">
+            <span class="ai-bar-label">🤖 本題專屬 AI 家教引導：</span>
+            <a class="btn-ai btn-chatgpt" href="#" onclick="launchAI('chatgpt', '階段1 題目2', '計算 (根號19)^2 的數值是多少？')">🟢 在我的 ChatGPT 啟動伴學</a>
+            <a class="btn-ai btn-gemini" href="#" onclick="launchAI('gemini', '階段1 題目2', '計算 (根號19)^2 的數值是多少？')">🔵 在學校 Gemini 啟動伴學</a>
+            <button class="btn-ai btn-copy-prompt" onclick="copyPrompt('階段1 題目2', '計算 (根號19)^2 的數值是多少？')">📋 複製提示咒語</button>
+          </div>
+        </div>
+
+        <!-- 練習題 3 -->
+        <div class="exercise-item" id="ex3">
+          <div class="exercise-title">題目 3：若某正方形邊長為 $\sqrt{x}$，已知其面積為 8，請問 $x$ 是多少？</div>
+          <div class="exercise-input-row">
+            <input type="text" class="answer-input" id="ans3" placeholder="輸入 x 的值" />
+            <button class="btn-check" onclick="checkAnswer('ans3', ['8'], 'fb3')">驗證答案</button>
+          </div>
+          <div class="feedback-msg" id="fb3"></div>
+
+          <!-- AI 發射鈕 -->
+          <div class="ai-action-bar">
+            <span class="ai-bar-label">🤖 本題專屬 AI 家教引導：</span>
+            <a class="btn-ai btn-chatgpt" href="#" onclick="launchAI('chatgpt', '階段1 題目3', '已知某正方形邊長為 根號x，面積為 8，請問 x 是多少？')">🟢 在我的 ChatGPT 啟動伴學</a>
+            <a class="btn-ai btn-gemini" href="#" onclick="launchAI('gemini', '階段1 題目3', '已知某正方形邊長為 根號x，面積為 8，請問 x 是多少？')">🔵 在學校 Gemini 啟動伴學</a>
+            <button class="btn-ai btn-copy-prompt" onclick="copyPrompt('階段1 題目3', '已知某正方形邊長為 根號x，面積為 8，請問 x 是多少？')">📋 複製提示咒語</button>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Toast 提示元件 -->
+  <div class="toast-msg" id="toast">已複製解題咒語！可直接貼給您的 ChatGPT 或 Gemini 對話！</div>
+
+  <script>
+    // 摺疊思考階梯
+    function toggleThinking(id) {
+      const el = document.getElementById(id);
+      const hint = document.getElementById('hint-' + id);
+      if (el.classList.contains('show')) {
+        el.classList.remove('show');
+        hint.innerText = '點擊展開思考階梯 ▾';
+      } else {
+        el.classList.add('show');
+        hint.innerText = '收合思考階梯 ▴';
+      }
+    }
+
+    // 驗證答案
+    function checkAnswer(inputId, validAnswers, feedbackId) {
+      const val = document.getElementById(inputId).value.trim();
+      const fb = document.getElementById(feedbackId);
+      if (!val) {
+        fb.className = 'feedback-msg wrong';
+        fb.innerText = '⚠️ 請先輸入你的答案喔！';
+        return;
+      }
+      if (validAnswers.includes(val)) {
+        fb.className = 'feedback-msg correct';
+        fb.innerHTML = '🎉 太棒了，答對了！你已經完全掌握了幾何意義！';
+      } else {
+        fb.className = 'feedback-msg wrong';
+        fb.innerHTML = '🤔 答案不太對喔！想想看邊長與面積的關係，或者點下方按鈕請 AI 提示你第一步！';
+      }
+    }
+
+    // 生成蘇格拉底教學提示詞
+    function generatePrompt(title, question) {
+      return `你好！我是正在學習國二數學「二次方根」的學生。我正在寫馮老師的【${title}】。\n` +
+             `題目是：「${question}」。\n\n` +
+             `請擔任馮老師的專屬數學伴學助教，嚴格遵守以下兩點：\n` +
+             `1. 嚴禁直接告訴我最終答案，也不要直接把整個算式算給我看；\n` +
+             `2. 請用「蘇格拉底提問引導法」，先問我一個啟發性的第一步問題（例如面積與邊長的關係），讓我一步步動腦解出來！`;
+    }
+
+    // 一鍵喚醒學生的 ChatGPT 或 Gemini
+    function launchAI(platform, title, question) {
+      const prompt = generatePrompt(title, question);
+      
+      // 複製到剪貼簿備援
+      navigator.clipboard.writeText(prompt);
+      showToast('已複製伴學咒語！正在為你開啟 ' + (platform === 'chatgpt' ? 'ChatGPT' : 'Gemini') + '...');
+
+      // 跳轉至學生的 AI 服務
+      setTimeout(() => {
+        if (platform === 'chatgpt') {
+          // ChatGPT Web Deep Link
+          window.open('https://chatgpt.com/?q=' + encodeURIComponent(prompt), '_blank');
+        } else if (platform === 'gemini') {
+          // Google Gemini Web
+          window.open('https://gemini.google.com/app', '_blank');
+        }
+      }, 500);
+    }
+
+    // 複製提示詞到剪貼簿
+    function copyPrompt(title, question) {
+      const prompt = generatePrompt(title, question);
+      navigator.clipboard.writeText(prompt).then(() => {
+        showToast('📋 已複製專屬解題咒語！可以直接貼給您的 AI 伴學對話！');
+      });
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.innerText = msg;
+      t.style.display = 'block';
+      setTimeout(() => {
+        t.style.display = 'none';
+      }, 3500);
+    }
+  </script>
+
+</body>
+</html>
