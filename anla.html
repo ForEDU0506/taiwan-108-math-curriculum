@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>少年仔安啦會客室 · 每一種心情都值得被好好聆聽</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@600;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <style>
+    :root {
+      --ink: #102c52;
+      --muted: #53657a;
+      --green: #6e998d;
+      --coral: #ee735c;
+      --soft: #fbfdfc;
+      --serif: "Noto Serif TC", serif;
+      --sans: "Noto Sans TC", sans-serif;
+      --mono: "JetBrains Mono", monospace;
+    }
+    body {
+      font-family: var(--sans);
+      background-color: var(--soft);
+      color: var(--ink);
+      scroll-behavior: smooth;
+    }
+    .font-serif-tc { font-family: var(--serif); }
+    .font-mono-code { font-family: var(--mono); }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(216, 224, 230, 0.8);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+  <div id="app" class="flex flex-col flex-1">
+    
+    <!-- 頂端純淨導覽列 -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+        <a href="#top" class="flex items-center gap-2.5 text-slate-900 group">
+          <span class="text-teal-700 text-2xl font-serif-tc transition group-hover:scale-110">❧</span>
+          <div>
+            <span class="font-serif-tc text-lg font-bold tracking-tight text-slate-800">少年仔安啦會客室</span>
+            <span class="hidden sm:inline-block ml-2 text-[11px] bg-rose-50 text-rose-700 border border-rose-200 px-2 py-0.5 rounded-full font-medium">台北 × 南投 兒少守護專案</span>
+          </div>
+        </a>
+
+        <nav class="flex items-center gap-2 sm:gap-4 text-xs font-medium text-slate-600">
+          <a href="#talk" class="px-3 py-1.5 rounded-lg hover:text-teal-800 hover:bg-teal-50/60 transition">體驗傾聽</a>
+          <a href="#co-create" class="px-3 py-1.5 rounded-lg text-rose-700 bg-rose-50 hover:bg-rose-100/70 transition font-semibold">🤝 南投共創專區</a>
+          <a href="#help" class="px-3 py-1.5 rounded-lg text-amber-800 hover:bg-amber-50 transition">安心守護</a>
+          <a href="./class/index.html" class="px-3 py-1.5 rounded-lg text-sky-700 bg-sky-50 hover:bg-sky-100/70 transition font-semibold flex items-center gap-1"><span>📐</span><span>國中數學素養旗艦</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主體內容（單一聚焦：少年仔安啦會客室） -->
+    <main id="top" class="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 py-8 sm:py-12 space-y-16">
+      
+      <!-- 區塊一：暖心迎賓 (Hero) -->
+      <section class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pt-2">
+        <div class="md:col-span-7 space-y-5 text-left">
+          <div class="inline-flex items-center gap-1.5 text-xs text-teal-800 bg-teal-50 border border-teal-200/80 px-3.5 py-1.5 rounded-full font-medium">
+            <span>🌿 陪伴少年，安然成長 · 沒有評價，只有理解</span>
+          </div>
+          <h1 class="font-serif-tc text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-[1.25] tracking-tight">
+            在這裡，<br>
+            每一種心情都值得被好好聆聽。
+          </h1>
+          <p class="text-slate-600 text-sm sm:text-base leading-relaxed max-w-lg font-light">
+            不說大道理、沒有評價，只有真誠的理解與接納。<br class="hidden sm:inline">
+            專為青少年量身打造的溫暖心靈客廳，由台北與南投社工夥伴攜手用心陪伴。
+          </p>
+          <div class="pt-2 flex flex-wrap gap-3">
+            <a href="#talk" class="px-6 py-3.5 bg-teal-800 hover:bg-teal-900 text-white font-medium text-sm rounded-xl shadow-sm transition inline-flex items-center gap-2">
+              <span>開始聊聊心情</span>
+              <span>→</span>
+            </a>
+            <a href="#co-create" class="px-5 py-3.5 border border-slate-300 hover:border-slate-400 text-slate-700 font-medium text-sm rounded-xl hover:bg-slate-50 transition inline-flex items-center gap-1.5">
+              <span>🤝 Ann 研討工具箱</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="md:col-span-5 flex justify-center">
+          <div class="relative w-full max-w-sm rounded-3xl overflow-hidden shadow-lg border border-slate-200/80 aspect-square bg-amber-50">
+            <img src="./welfare/assets/hero-room.png" alt="陽光照耀的溫暖房間與熟睡的貓" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent"></div>
+            <div class="absolute bottom-4 left-4 right-4 text-white text-xs font-medium backdrop-blur-sm bg-black/20 p-2.5 rounded-xl border border-white/20">
+              ☕ 想說的，從這裡開始。你並不孤單。
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 區塊二：互動傾聽實測 (Interactive Talk) -->
+      <section id="talk" class="glass-card rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+        <div class="border-b border-slate-100 pb-4 flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h2 class="font-serif-tc text-2xl font-bold text-slate-900 flex items-center gap-2">
+              <span>💬 傾聽會客室實測</span>
+              <span class="text-xs font-normal text-teal-700 bg-teal-50 px-2.5 py-0.5 rounded-full border border-teal-200">V1.6 漸強漸弱引擎</span>
+            </h2>
+            <p class="text-xs text-slate-500 mt-1">Ann 可以直接在下方輸入想說的話，測試對話的傾聽節奏與回覆溫度：</p>
+          </div>
+
+          <!-- 快速情境帶入 -->
+          <div class="flex items-center gap-1.5 text-xs text-slate-500">
+            <span class="text-[11px] text-slate-400">快速試詞：</span>
+            <button @click="setInput('我最近好累，不知道自己在忙什麼...')" class="hover:text-teal-700 bg-slate-100 px-2.5 py-1 rounded-md text-[11px] transition">疲憊迷惘</button>
+            <button @click="setInput('朋友突然都不理我了，是不是我做錯了什麼？')" class="hover:text-teal-700 bg-slate-100 px-2.5 py-1 rounded-md text-[11px] transition">人際孤立</button>
+            <button @click="setInput('這世界如果沒有我也沒差吧...')" class="hover:text-rose-700 bg-rose-50 text-rose-800 px-2.5 py-1 rounded-md text-[11px] transition">高危預警</button>
+          </div>
+        </div>
+
+        <!-- 對話視窗 -->
+        <div class="space-y-4">
+          <div class="space-y-3 max-h-80 overflow-y-auto pr-1">
+            <div v-for="(chat, i) in conversation" :key="i" class="flex flex-col gap-1">
+              <!-- 青少年發言 -->
+              <div v-if="chat.from === 'user'" class="flex justify-end">
+                <div class="bg-blue-600 text-white rounded-2xl rounded-tr-none px-4 py-2.5 text-sm max-w-lg leading-relaxed shadow-sm">
+                  {{ chat.text }}
+                </div>
+              </div>
+              <!-- 會客室傾聽回應 -->
+              <div v-else class="flex justify-start items-start gap-2.5">
+                <div class="w-8 h-8 rounded-full bg-teal-800 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
+                  安
+                </div>
+                <div class="bg-slate-50 border border-slate-200 text-slate-800 rounded-2xl rounded-tl-none px-4 py-3 text-sm max-w-lg leading-relaxed shadow-sm space-y-1.5">
+                  <div class="text-[10px] text-teal-800 font-bold uppercase tracking-wider">少年仔安啦 · 溫暖傾聽</div>
+                  <div class="whitespace-pre-wrap">{{ chat.text }}</div>
+                  <div v-if="chat.isCrisis" class="mt-2 pt-2 border-t border-rose-200 text-rose-800 bg-rose-50/80 p-2 rounded-lg text-xs flex items-center justify-between">
+                    <span>❤️ 你很珍貴，身邊一直有人願意陪你。</span>
+                    <a href="tel:1925" class="bg-rose-600 text-white px-2.5 py-1 rounded font-bold hover:bg-rose-700 transition">撥打 1925</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 輸入列 -->
+          <div class="flex items-end gap-2 pt-2 border-t border-slate-100">
+            <textarea 
+              v-model="userMessage" 
+              @keydown.enter.prevent="sendMessage"
+              rows="2" 
+              placeholder="輸入一句少年的心情，體驗對話回應...（Enter 發送）" 
+              class="flex-1 border border-slate-300 rounded-2xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-600/30 focus:border-teal-600 resize-none"
+            ></textarea>
+            <button 
+              @click="sendMessage" 
+              :disabled="!userMessage.trim()" 
+              class="h-14 px-6 bg-teal-800 hover:bg-teal-900 disabled:bg-slate-200 text-white font-medium text-sm rounded-2xl transition shadow-sm shrink-0 flex items-center gap-1.5"
+            >
+              <span>送出</span>
+              <span>→</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 區塊三：台北 × 南投 專案共創專區 (Ann Collaboration Lounge) -->
+      <section id="co-create" class="space-y-6 pt-2">
+        <div class="border-b border-slate-200 pb-3 flex flex-wrap items-end justify-between gap-2">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xl">🤝</span>
+              <h2 class="font-serif-tc text-2xl font-bold text-slate-900">台北 × 南投 專案共創專區</h2>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">專為志偉老師與南投 Ann 打造的評審工具箱，開箱即用、數據即時同步：</p>
+          </div>
+        </div>
+
+        <!-- 3 大正式工具卡片 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <!-- 卡片 1: V1.6 對話演示觀摩 -->
+          <div class="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+            <div class="space-y-2">
+              <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-lg">
+                📖
+              </div>
+              <h3 class="font-bold text-slate-800 text-base font-serif-tc">V1.6 漸強漸弱演示</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                收錄 5 份涵蓋日常、壓力、疏離至沉澱的真實回應示範，方便 Ann 逐句檢閱語氣。
+              </p>
+            </div>
+            <div class="pt-4">
+              <button @click="showDemoModal = true" class="w-full py-2.5 bg-slate-100 hover:bg-teal-50 text-teal-800 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-1">
+                <span>展開 5 份對話演示</span>
+                <span>↗</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 卡片 2: 本機可紀錄模式 (V1.6) -->
+          <div class="bg-white border border-rose-200/90 rounded-2xl p-5 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+            <div class="space-y-2">
+              <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-700 flex items-center justify-center font-bold text-lg">
+                🛠️
+              </div>
+              <h3 class="font-bold text-slate-800 text-base font-serif-tc">現場訪談紀錄工具</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                落實「30秒一筆、零 Token 消耗、離線可用」。社工訪談時可快速存盤，台北-南投通用。
+              </p>
+            </div>
+            <div class="pt-4">
+              <a href="./welfare/welfare_record_local_V1.6.html" target="_blank" class="w-full py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-semibold transition flex items-center justify-center gap-1 shadow-sm">
+                <span>開啟本機紀錄模式</span>
+                <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- 卡片 3: 台北-南投共用 Sheet -->
+          <div class="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+            <div class="space-y-2">
+              <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-lg">
+                📊
+              </div>
+              <h3 class="font-bold text-slate-800 text-base font-serif-tc">共用試算表 (Sheet)</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                跨團隊數據即時匯流中心，南投訪談成果與台北統計無縫整合於同一份雲端表格。
+              </p>
+            </div>
+            <div class="pt-4">
+              <a href="https://docs.google.com/spreadsheets/d/1SZC18XAx7eC6VkdUmAPf8iRCS87Sar8xRDvLxmaL4-c/edit" target="_blank" rel="noopener" class="w-full py-2.5 bg-slate-100 hover:bg-emerald-50 text-emerald-800 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-1">
+                <span>開啟雲端試算表</span>
+                <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Ann 現場修改回饋便條紙 (Feedback Board) -->
+        <div class="bg-amber-50/70 border border-amber-200/80 rounded-2xl p-5 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="text-lg">✍️</span>
+              <h3 class="font-bold text-amber-950 font-serif-tc text-sm">Ann 與志偉老師 · 現場修改回饋筆記</h3>
+            </div>
+            <button @click="copyNotes" class="text-xs text-amber-800 bg-amber-100/80 hover:bg-amber-200 px-3 py-1 rounded-lg font-medium transition flex items-center gap-1">
+              <span>{{ copyBtnText }}</span>
+            </button>
+          </div>
+          <p class="text-xs text-amber-800/80">Ann 在討論時，可將任何文字修訂、語氣建議隨手打在下方，自動存留在瀏覽器中，隨時可複製給 AI 實施：</p>
+          <textarea 
+            v-model="feedbackNotes" 
+            @input="saveNotes"
+            rows="4" 
+            placeholder="範例：
+1. 傾聽第三句語氣可以再簡短一點，青少年比較不喜歡太長的回覆。
+2. 考差了的情境，可以增加「先吃點好吃的」生活化連結。
+3. 南投端訪談預計下週二再收集 3 筆個案..."
+            class="w-full bg-white border border-amber-200 rounded-xl p-3 text-xs text-slate-800 leading-relaxed focus:outline-none focus:ring-2 focus:ring-amber-500/30"
+          ></textarea>
+        </div>
+
+      </section>
+
+      <!-- 區塊四：安心守護 (Safety & Help) -->
+      <section id="help" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 text-center space-y-4">
+        <div class="max-w-md mx-auto space-y-2">
+          <span class="text-teal-700 text-2xl font-serif-tc">❧</span>
+          <h2 class="font-serif-tc text-2xl font-bold text-slate-900">如果你現在覺得不安全</h2>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            這個網站是陪伴與整理心情的小空間，無法取代即時的危機處置。若您或身邊的朋友需要緊急援助，請隨時撥打以下免費守護專線：
+          </p>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-3 pt-2">
+          <a href="tel:1925" class="px-5 py-3 rounded-xl bg-teal-800 hover:bg-teal-900 text-white text-xs font-semibold shadow-sm transition flex flex-col items-center">
+            <span>撥打 1925 安心專線</span>
+            <span class="text-[10px] text-teal-200 font-normal">衛福部 24 小時免費心靈守護</span>
+          </a>
+          <a href="tel:113" class="px-5 py-3 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold transition flex flex-col items-center">
+            <span>撥打 113 保護專線</span>
+            <span class="text-[10px] text-slate-400 font-normal">兒少保護、家庭暴力諮詢</span>
+          </a>
+          <a href="tel:110" class="px-5 py-3 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold transition flex flex-col items-center">
+            <span>撥打 110 報案專線</span>
+            <span class="text-[10px] text-slate-400 font-normal">立即處置生命危急情況</span>
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 純淨頁尾 -->
+    <footer class="border-t border-slate-200 bg-white py-8 text-center text-xs text-slate-400">
+      <div class="max-w-5xl mx-auto px-4 space-y-2">
+        <p class="text-slate-500 font-medium">少年仔安啦會客室 · 台北與南投兒少陪伴專案</p>
+        <p class="text-[11px] text-slate-400">本站為心情傾聽與陪伴空間，所有測試紀錄均受隱私與倫理保護 · 技術支持：Google Cloud</p>
+      </div>
+    </footer>
+
+    <!-- 演示觀摩 Modal -->
+    <div v-if="showDemoModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl border border-slate-200 max-h-[85vh] flex flex-col">
+        <div class="flex items-center justify-between border-b pb-3 mb-4">
+          <div class="flex items-center gap-2">
+            <span class="text-xl">📖</span>
+            <h3 class="font-serif-tc font-bold text-slate-800 text-lg">V1.6 漸強漸弱傾聽 · 5 種對話示範</h3>
+          </div>
+          <button @click="showDemoModal = false" class="text-slate-400 hover:text-slate-600 text-lg">✕</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto space-y-4 pr-1 text-xs">
+          <div v-for="(demo, idx) in demoCases" :key="idx" class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-teal-800 text-sm font-serif-tc">示範 {{ idx + 1 }} · {{ demo.title }}</span>
+              <span class="text-[10px] bg-teal-100/70 text-teal-800 px-2 py-0.5 rounded-full font-medium">{{ demo.stage }}</span>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-slate-200 text-slate-700">
+              <span class="text-slate-400 font-bold mr-1">青：</span>{{ demo.user }}
+            </div>
+            <div class="bg-teal-50/60 p-2.5 rounded-xl border border-teal-100 text-teal-950 leading-relaxed">
+              <span class="text-teal-700 font-bold mr-1">安：</span>{{ demo.reply }}
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t mt-4 flex justify-end">
+          <button @click="showDemoModal = false" class="px-5 py-2 bg-teal-800 text-white rounded-xl text-xs font-medium">關閉示範</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const { createApp, ref, onMounted } = Vue;
+
+    createApp({
+      setup() {
+        const userMessage = ref('');
+        const conversation = ref([
+          {
+            from: 'bot',
+            text: '你好呀！我是會客室的傾聽夥伴。今天的心情像是怎樣的天氣呢？慢慢說，我都在這裡聽你說。'
+          }
+        ]);
+        const showDemoModal = ref(false);
+        const feedbackNotes = ref(localStorage.getItem('ann_feedback_notes') || '');
+        const copyBtnText = ref('📋 複製修改筆記');
+
+        const demoCases = [
+          {
+            title: '日常輕量開場（溫和點頭）',
+            stage: '階段一：漸強建立信任',
+            user: '今天上課好無聊，老師講的我都有聽沒有懂。',
+            reply: '坐在那裡聽著聽不懂的東西，真的會覺得時間過得好慢好累喔。那你今天下課有什麼稍微喘口氣的時刻嗎？'
+          },
+          {
+            title: '人際委屈宣洩（全神貫注接住）',
+            stage: '階段二：飽滿同理陪伴',
+            user: '我朋友她們今天去福利社居然故意不揪我，以前明明都一起走的...',
+            reply: '突然被排除在外的感覺，真的很刺、很不好受吧。心裡一定會一邊委屈，一邊又忍不住胡思亂想。這不是你的錯，辛苦你憋著這份難過了。'
+          },
+          {
+            title: '學業自我懷疑（不說教、找亮點）',
+            stage: '階段三：輕柔微光引導',
+            user: '我數學這次又不及格了，我好像怎麼努力都沒有用。',
+            reply: '看著分數的那一刻，一定覺得很挫折吧，好像前幾天的辛苦全被否定了。可是你願意為它努力過，這件事本身就很值得被肯定喔。'
+          },
+          {
+            title: '心情漸趨平穩（漸弱留白）',
+            stage: '階段四：漸弱沉澱安頓',
+            user: '跟你說完好像感覺好一點點了，謝謝你。',
+            reply: '太好了，看你能稍微鬆一口氣，我也為你感到溫暖。今晚先給自己吃頓好吃的，好好睡個覺，有需要我隨時在。'
+          },
+          {
+            title: '高風險危機警戒（安全第一無妥協）',
+            stage: '最高防線：守護介入',
+            user: '我真的覺得活著好痛苦，好像消失了大家都比較輕鬆。',
+            reply: '聽到你這麼說，我真的很心疼你的痛苦，也想讓你知道：你的存在非常珍貴，絕不是負擔。請現在讓信任的大人陪著你，或是撥打 1925，我們都在這裡陪你度過。',
+            isCrisis: true
+          }
+        ];
+
+        const setInput = (text) => {
+          userMessage.value = text;
+        };
+
+        const sendMessage = () => {
+          const text = userMessage.value.trim();
+          if (!text) return;
+
+          conversation.value.push({ from: 'user', text: text });
+          userMessage.value = '';
+
+          setTimeout(() => {
+            let reply = '';
+            let isCrisis = false;
+
+            if (text.includes('死') || text.includes('消失') || text.includes('沒有我也沒差') || text.includes('活著好痛苦')) {
+              reply = '聽到你說出這句話，我真的很心疼你心裡承載了這麼沉重的痛苦。我想讓你知道：你的感受很真實，而且你絕不是負擔。請一定要找人陪著你，身邊有很多人都深深在乎你。';
+              isCrisis = true;
+            } else if (text.includes('累') || text.includes('迷惘') || text.includes('忙')) {
+              reply = '聽起來你已經撐了很久很久了呢... 辛苦了。當不知道在忙什麼的時候，整個人都會像被掏空一樣。要不要先停下來深呼吸一口，想想今天有沒有哪一件小小的事情讓你有喘口氣？';
+            } else if (text.includes('朋友') || text.includes('理我') || text.includes('做錯')) {
+              reply = '人際關係的突然改變，真的很讓人心慌和受傷... 好像只有自己一個人留在原地。這份不安很讓人難過，但請先不要急著怪自己好嗎？';
+            } else if (text.includes('考') || text.includes('不及格') || text.includes('輸')) {
+              reply = '分數確實會讓人感到很沉重、很氣餒，但分數真的不能代表你的全部價值。你願意面對它、甚至願意在這裡說出來，就已經很有勇氣了。';
+            } else {
+              reply = '我在這裡聽你說。這段時間是不是遇到了什麼讓你放在心裡很久的事情呢？慢慢說沒關係。';
+            }
+
+            conversation.value.push({ from: 'bot', text: reply, isCrisis: isCrisis });
+          }, 500);
+        };
+
+        const saveNotes = () => {
+          localStorage.setItem('ann_feedback_notes', feedbackNotes.value);
+        };
+
+        const copyNotes = () => {
+          if (!feedbackNotes.value.trim()) {
+            alert('筆記內容目前是空的喔！');
+            return;
+          }
+          navigator.clipboard.writeText(feedbackNotes.value).then(() => {
+            copyBtnText.value = '✅ 已複製至剪貼簿！';
+            setTimeout(() => { copyBtnText.value = '📋 複製修改筆記'; }, 2000);
+          });
+        };
+
+        onMounted(() => {});
+
+        return {
+          userMessage,
+          conversation,
+          showDemoModal,
+          demoCases,
+          feedbackNotes,
+          copyBtnText,
+          setInput,
+          sendMessage,
+          saveNotes,
+          copyNotes
+        };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>

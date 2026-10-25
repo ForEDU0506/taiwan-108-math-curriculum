@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="少年仔安啦會客室：一個可以慢慢說、慢慢整理心情的地方。" />
+    <title>少年仔安啦會客室</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="回到少年仔安啦會客室首頁"><span aria-hidden="true">❧</span> 少年仔安啦會客室</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">選單 <span aria-hidden="true">☰</span></button>
+      <nav id="site-menu" class="site-menu" aria-label="主選單">
+        <a href="../index.html">⌂ 回 HAIC 總站</a><a href="#about">你可以在這裡</a><a href="#talk">開始聊聊</a><a href="#help">需要幫忙</a><a href="../class/index.html">教育應用</a><a href="../cowork/index.html">協同工作</a><a href="./welfare_record_local_V1.6.html" style="color:#ee735c; font-weight:700;">🛠️ V1.6 本機紀錄模式</a><a href="https://docs.google.com/spreadsheets/d/1SZC18XAx7eC6VkdUmAPf8iRCS87Sar8xRDvLxmaL4-c/edit" target="_blank" rel="noopener">📊 台北-南投共用 Sheet</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <h1 id="hero-title">你不用<br />一個人撐著</h1>
+          <p>這是一個屬於青少年的會客室。無論你正在經歷什麼，都可以在這裡慢慢說、慢慢想。</p>
+          <a class="button primary" href="#talk">開始聊聊 <span aria-hidden="true">→</span></a>
+          <p class="quiet-note">想說的，從這裡開始。沒有評價，只有理解。</p>
+        </div>
+        <div class="hero-image"><img src="assets/hero-room.png" alt="一位青少年在有陽光與綠色植物的房間裡安靜閱讀，身旁有一隻熟睡的貓。" /></div>
+      </section>
+
+      <section id="about" class="welcome-section" aria-labelledby="welcome-title">
+        <div class="section-intro"><span class="leaf" aria-hidden="true">❧</span><h2 id="welcome-title">你可以在這裡</h2><p>不管是情緒、學業、人際，或是對未來的迷惘，這裡都是一個可以慢慢整理心情的地方。</p></div>
+        <div class="path-list">
+          <article><span class="path-icon" aria-hidden="true">◒</span><h3>說出你的感受</h3><p>開心、煩惱、困惑，任何情緒都值得被聽見。</p></article>
+          <article><span class="path-icon" aria-hidden="true">⌁</span><h3>找一些方向</h3><p>從小小的事情開始，一起想想下一步。</p></article>
+          <article><span class="path-icon" aria-hidden="true">◜</span><h3>感受到你並不孤單</h3><p>你可以安心做自己，遇見願意理解你的人。</p></article>
+        </div>
+      </section>
+
+      <section id="talk" class="talk-section" aria-labelledby="talk-title">
+        <div class="talk-intro"><h2 id="talk-title">現在最想說的是什麼？</h2><p>你不需要先把話整理好。寫下一點點也可以。</p></div>
+        <form id="talk-form" class="talk-form">
+          <label for="message">想說的話</label>
+          <textarea id="message" maxlength="1000" placeholder="在這裡寫下你想說的……"></textarea>
+          <div class="form-row"><span id="counter" aria-live="polite">0 / 1000</span><button class="button send" type="submit">送出心情 <span aria-hidden="true">→</span></button></div>
+        </form>
+        <div id="reply" class="reply" aria-live="polite" hidden></div>
+      </section>
+
+      <section id="help" class="help-section" aria-labelledby="help-title">
+        <div><span class="leaf" aria-hidden="true">❧</span><h2 id="help-title">如果你現在覺得不安全</h2><p>請優先找身邊信任的大人陪你，或聯繫當地緊急服務。這個網站不能取代即時的危機協助。</p></div>
+        <div class="help-actions">
+          <a class="help-link urgent" href="tel:110">撥打 110 <small>緊急情況</small></a>
+          <a class="help-link" href="tel:1925">撥打 1925 <small>安心專線，24 小時</small></a>
+          <a class="help-link" href="tel:113">撥打 113 <small>保護專線</small></a>
+        </div>
+      
+      <!-- 功能強化工作區（台北-南投共用版 V1.6） -->
+      <section id="workspace" class="workspace-section" style="margin: 48px auto; max-width: 960px; padding: 24px; background: #fffbf9; border: 1px solid #ffd8cf; border-radius: 20px; box-shadow: 0 4px 16px rgba(238, 115, 92, 0.08);">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+              <span style="font-size: 1.25rem;">🛠️</span>
+              <h2 style="font-size: 1.15rem; font-weight: 700; color: #102c52; margin: 0;">少年仔安啦會客室 · 功能強化工作區 (V1.6)</h2>
+              <span style="background: #feece7; color: #ee735c; font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 9999px; border: 1px solid #fec7b9;">台北-南投共用</span>
+            </div>
+            <p style="font-size: 0.85rem; color: #53657a; margin: 0; line-height: 1.6;">
+              落實「30秒一筆、零 Token 消耗、離線可用」務實原則。含漸強漸弱傾聽配置、本機紀錄模式與共用雲端試算表。
+            </p>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <a href="./welfare_record_local_V1.6.html" style="display: inline-flex; align-items: center; gap: 6px; background: #ee735c; color: white; padding: 10px 18px; border-radius: 12px; font-size: 0.85rem; font-weight: 600; text-decoration: none; box-shadow: 0 2px 6px rgba(238, 115, 92, 0.25);">
+              <span>進入本機紀錄模式 (V1.6)</span>
+              <span>→</span>
+            </a>
+            <a href="https://docs.google.com/spreadsheets/d/1SZC18XAx7eC6VkdUmAPf8iRCS87Sar8xRDvLxmaL4-c/edit" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; background: white; color: #102c52; border: 1px solid #cbd5e1; padding: 10px 16px; border-radius: 12px; font-size: 0.85rem; font-weight: 600; text-decoration: none;">
+              <span>開啟台北-南投共用 Sheet</span>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer><p>少年仔安啦會客室 · HAIC 公益研究子專案</p><p>若有立即危險，請聯繫信任的大人或當地緊急服務。</p></footer>
+    <script src="app.js"></script>
+  </body>
+</html>
