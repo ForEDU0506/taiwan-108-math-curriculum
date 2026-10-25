@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>國中數學（二上）畢氏定理與坐標距離「探究 → 段考」極速對照與實戰學習單</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1.0cm 0.8cm;
+        }
+        body {
+            font-family: 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', sans-serif;
+            color: #1e293b;
+            line-height: 1.45;
+            background: #fff;
+            margin: 0;
+            padding: 16px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #0f172a;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+        .title {
+            font-size: 16pt;
+            font-weight: 800;
+            margin: 0 0 4px 0;
+            letter-spacing: 0.5px;
+            color: #0f172a;
+        }
+        .subtitle {
+            font-size: 9.5pt;
+            color: #475569;
+            margin: 0 0 6px 0;
+        }
+        .meta-bar {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10pt;
+            font-weight: 600;
+            border: 1px solid #cbd5e1;
+            padding: 5px 12px;
+            border-radius: 6px;
+            background-color: #f8fafc;
+        }
+        .action-bar {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        .btn {
+            background: #0284c7;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            font-size: 9pt;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-outline {
+            background: #fff;
+            color: #0284c7;
+            border: 1.5px solid #0284c7;
+        }
+        @media print {
+            .action-bar { display: none; }
+            body { padding: 0; }
+        }
+        .inquiry-banner {
+            border: 1.5px dashed #059669;
+            border-radius: 6px;
+            padding: 8px 12px;
+            background-color: #f0fdf4;
+            margin-bottom: 12px;
+            font-size: 9.5pt;
+        }
+        .inquiry-title {
+            font-weight: 800;
+            color: #065f46;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .stage-box {
+            border: 1.2px solid #0284c7;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            page-break-inside: avoid;
+            background: #ffffff;
+        }
+        .stage-header {
+            background-color: #f0f9ff;
+            border-bottom: 1.2px solid #0284c7;
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .stage-title {
+            font-size: 10.5pt;
+            font-weight: 700;
+            color: #0369a1;
+        }
+        .stage-star {
+            font-size: 9pt;
+            color: #ea580c;
+            font-weight: 700;
+        }
+        .stage-body {
+            padding: 6px 10px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        .info-pill {
+            background-color: #f1f5f9;
+            border-left: 3px solid #64748b;
+            padding: 4px 6px;
+            font-size: 9pt;
+            border-radius: 0 4px 4px 0;
+        }
+        .sop-pill {
+            background-color: #ecfdf5;
+            border-left: 3px solid #059669;
+            padding: 4px 6px;
+            font-size: 9pt;
+            border-radius: 0 4px 4px 0;
+            color: #065f46;
+        }
+        .trap-pill {
+            background-color: #fef2f2;
+            border-left: 3px solid #dc2626;
+            padding: 4px 6px;
+            font-size: 9pt;
+            border-radius: 0 4px 4px 0;
+            color: #991b1b;
+        }
+        .practice-box {
+            border: 1px dashed #94a3b8;
+            border-radius: 4px;
+            padding: 6px 8px;
+            background-color: #fafafa;
+            margin-top: 4px;
+        }
+        .practice-q {
+            font-size: 9.5pt;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+        .write-blank {
+            min-height: 38px;
+            border-bottom: 1px dotted #94a3b8;
+            margin-top: 4px;
+            color: #64748b;
+            font-size: 8.5pt;
+            padding-top: 2px;
+        }
+        .checklist-box {
+            border: 2px solid #ea580c;
+            border-radius: 6px;
+            background-color: #fffaf5;
+            padding: 8px 12px;
+            margin-top: 10px;
+            page-break-inside: avoid;
+        }
+        .check-item {
+            font-size: 9pt;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="action-bar">
+        <button class="btn" onclick="window.print()">🖨️ 一鍵 A4 列印學習單</button>
+        <a class="btn btn-outline" href="pythagorean-worksheet-teacher.html">👩‍🏫 切換教師詳解評分版</a>
+        <a class="btn btn-outline" href="index.html">🏠 返回數學課綱首頁</a>
+    </div>
+
+    <div class="header">
+        <h1 class="title">國中數學（二上）畢氏定理與坐標距離「探究 → 段考」極速對照與實戰學習單</h1>
+        <div class="subtitle">依據 108 課綱 S-8-6 與 G-8-1 標準 ‧ Meta AI（元思）命題審核 ‧ 馮御工程轉譯</div>
+        <div class="meta-bar">
+            <span>年級班級：八年______班</span>
+            <span>座號：______</span>
+            <span>姓名：__________________</span>
+            <span>評量得分：__________ / 100</span>
+        </div>
+    </div>
+
+    <!-- 探究教學亮點模組 -->
+    <div class="inquiry-banner">
+        <div class="inquiry-title">🔬 課堂核心探究思考：面積守恆與非線性連鎖反應</div>
+        <div>
+            <strong>1. 方格紙無字證明</strong>：直角三角形「邊長」不能直接加（$3+4 \ne 5$），但以三邊為邊長向外畫的三個正方形「面積」永遠守恆（$9+16=25$）！<br>
+            <strong>2. 梯子滑落連鎖反應</strong>：梯長 $L$ 守恆（$x^2+y^2=L^2$）。梯頂下滑 20 公分，梯腳外移<strong>絕非 20 公分</strong>！親自算算看體會非線性之美。
+        </div>
+    </div>
+
+    <!-- 階段 1 -->
+    <div class="stage-box">
+        <div class="stage-header">
+            <span class="stage-title">Stage 1：幾何直觀與無字證明（面積守恆）</span>
+            <span class="stage-star">段考必考指數：⭐⭐⭐⭐⭐</span>
+        </div>
+        <div class="stage-body">
+            <div class="grid-2">
+                <div class="info-pill"><strong>📌 段考怎麼考</strong>：以直角三角形三邊向外作正方形/半圓，求第三圖形面積。</div>
+                <div class="sop-pill"><strong>⚡ 速解SOP</strong>：兩直角邊圖形面積相加 ＝ 斜邊圖形面積！同理向外作半圓亦成立。</div>
+            </div>
+            <div class="trap-pill"><strong>⚠️ 易錯避坑</strong>：題目若問「斜邊長」，算完面積後務必記得<strong>開根號</strong>化為最簡根式！</div>
+            <div class="practice-box">
+                <div class="practice-q">✏️ 實戰演練 1：直角三角形兩直角邊向外所作之正方形面積分別為 18 與 32 平方公分，求以斜邊為邊長的正方形面積？斜邊長為何？</div>
+                <div class="write-blank">【解題歷程與留白處】：斜邊正方形面積 = ___________________ ； 斜邊長 = ___________________</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 階段 2 -->
+    <div class="stage-box">
+        <div class="stage-header">
+            <span class="stage-title">Stage 2：符號定義與公式求邊（求斜邊 vs 求股長）</span>
+            <span class="stage-star">段考必考指數：⭐⭐⭐⭐⭐</span>
+        </div>
+        <div class="stage-body">
+            <div class="grid-2">
+                <div class="info-pill"><strong>📌 段考怎麼考</strong>：給任意兩邊長求第三邊，包含含根號之無理數運算。</div>
+                <div class="sop-pill"><strong>⚡ 速解SOP</strong>：求斜邊用加法：$c = \sqrt{a^2+b^2}$；求股長用減法：$a = \sqrt{c^2-b^2}$。</div>
+            </div>
+            <div class="trap-pill"><strong>⚠️ 易錯避坑</strong>：求股長時誤用加法！手指示直角記號 $\llcorner$，其對面邊長最大，股長絕不可比斜邊大。</div>
+            <div class="practice-box">
+                <div class="practice-q">✏️ 實戰演練 2：直角三角形斜邊長為 12，其中一股長為 6，求另一股長？</div>
+                <div class="write-blank">【解題歷程與留白處】：另一股長 = $\sqrt{12^2 - (\quad)^2} =$ ___________________________</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 階段 3 -->
+    <div class="stage-box">
+        <div class="stage-header">
+            <span class="stage-title">Stage 3：勾股數與比例縮放（秒殺速解錦囊）</span>
+            <span class="stage-star">段考必考指數：⭐⭐⭐⭐⭐</span>
+        </div>
+        <div class="stage-body">
+            <div class="grid-2">
+                <div class="info-pill"><strong>📌 段考怎麼考</strong>：出現 3-4-5、5-12-13、7-24-25、8-15-17 的等倍放大或小數題型。</div>
+                <div class="sop-pill"><strong>⚡ 速解SOP</strong>：遇大數字先約分！例如 24 與 32 同除以 8 變 3:4，斜邊即為 $5 \times 8 = 40$。</div>
+            </div>
+            <div class="trap-pill"><strong>⚠️ 易錯避坑（雙解陷阱）</strong>：直角三角形兩邊長為 6 與 8，第三邊為 <strong>10 或 $2\sqrt{7}$</strong>（題目沒說 8 是不是斜邊）！</div>
+            <div class="practice-box">
+                <div class="practice-q">✏️ 實戰演練 3：直角三角形兩直角邊為 2.4 與 3.2，求斜邊長？若直角三角形兩邊長為 6 與 8，求第三邊？</div>
+                <div class="write-blank">【解題歷程與留白處】：(1) 斜邊 = ______________ ； (2) 第三邊可能為 = ______________________</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 階段 4 -->
+    <div class="stage-box">
+        <div class="stage-header">
+            <span class="stage-title">Stage 4：特殊直角三角形邊長比（45-45-90 與 30-60-90）</span>
+            <span class="stage-star">段考必考指數：⭐⭐⭐⭐</span>
+        </div>
+        <div class="stage-body">
+            <div class="grid-2">
+                <div class="info-pill"><strong>📌 段考怎麼考</strong>：正方形對角線求邊長、正三角形求高與面積。</div>
+                <div class="sop-pill"><strong>⚡ 速解SOP</strong>：$45^\circ-45^\circ-90^\circ$ 邊長比 $1:1:\sqrt{2}$；$30^\circ-60^\circ-90^\circ$ 邊長比 $1:\sqrt{3}:2$。</div>
+            </div>
+            <div class="trap-pill"><strong>⚠️ 易錯避坑</strong>：$\sqrt{3} \approx 1.732 < 2$！斜邊最大必為 2，$30^\circ$ 所對最小股必為 1（斜邊一半）。</div>
+            <div class="practice-box">
+                <div class="practice-q">✏️ 實戰演練 4：等腰直角三角形斜邊長為 8，求兩股長？邊長為 10 的正三角形其高與面積各為何？</div>
+                <div class="write-blank">【解題歷程與留白處】：等腰股長 = ______________ ； 正三角形高 = ______________ ，面積 = ______________</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 階段 5 -->
+    <div class="stage-box">
+        <div class="stage-header">
+            <span class="stage-title">Stage 5：逆定理與三角形形狀判別</span>
+            <span class="stage-star">段考必考指數：⭐⭐⭐⭐</span>
+        </div>
+        <div class="stage-body">
+            <div class="grid-2">
+                <div class="info-pill"><strong>📌 段考怎麼考</strong>：給三邊長判斷為「直角、銳角、鈍角」或「無法形成三角形」。</div>
+                <div class="sop-pill"><strong>⚡ 速解SOP</strong>：最大邊為 $c$。$a^2+b^2=c^2$（直角）；$a^2+b^2>c^2$（銳角）；$a^2+b^2<c^2$（鈍角）。</div>
+            </div>
+            <div class="trap-pill"><strong>⚠️ 易錯避坑</strong>：先檢查 $a+b > c$！三邊長 2, 3, 5 因 $2+3=5$ 連不起來，<strong>根本不是三角形</strong>！</div>
+            <div class="practice-box">
+                <div class="practice-q">✏️ 實戰演練 5：請判斷下列各組三邊長所構成的圖形：甲(3, 4, 6)、乙(5, 12, 13)、丙(2, 3, 5)。</div>
+                <div class="write-blank">【解題歷程與留白處】：甲為 _______________ 三角形；乙為 _______________ 三角形；丙為 _______________________</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 階段 6 -->
+    <div class="stage-box">
+        <div class="stage-header">
+            <span class="stage-title">Stage 6：直角坐標系兩點距離公式（G-8-1）</span>
+            <span class="stage-star">段考必考指數：⭐⭐⭐⭐⭐</span>
+        </div>
+        <div class="stage-body">
+            <div class="grid-2">
+                <div class="info-pill"><strong>📌 段考怎麼考</strong>：坐標平面兩點長度、原點距離、求未知坐標 $x$。</div>
+                <div class="sop-pill"><strong>⚡ 速解SOP</strong>：水平差平方 ＋ 垂直差平方開根號：$d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$。</div>
+            </div>
+            <div class="trap-pill"><strong>⚠️ 易錯避坑</strong>：負數相減注意負負得正！若點到原點距離為 5，坐標平方等於 16，答案必為 $\pm 4$ 雙解！</div>
+            <div class="practice-box">
+                <div class="practice-q">✏️ 實戰演練 6：求平面上兩點 $A(-2, 5)$ 與 $B(4, -3)$ 的線段長度？若 $P(x, 3)$ 到原點距離為 5，求 $x$？</div>
+                <div class="write-blank">【解題歷程與留白處】：$AB =$ __________________________________ ； $x =$ ______________________</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 階段 7 -->
+    <div class="stage-box">
+        <div class="stage-header">
+            <span class="stage-title">Stage 7：生活素養 梯子滑落與折竹經典</span>
+            <span class="stage-star">段考必考指數：⭐⭐⭐⭐⭐</span>
+        </div>
+        <div class="stage-body">
+            <div class="grid-2">
+                <div class="info-pill"><strong>📌 段考怎麼考</strong>：梯子靠牆滑落、旗桿折斷碰地、兩樹繩索跨距。</div>
+                <div class="sop-pill"><strong>⚡ 速解SOP</strong>：梯長守恆（斜邊不變）！先由舊高算舊底，再由新高算新底，相減即為滑動量。</div>
+            </div>
+            <div class="trap-pill"><strong>⚠️ 易錯避坑</strong>：梯頂下滑 4 公尺，梯腳絕非移動 4 公尺！請嚴格按兩次畢氏定理獨立求解。</div>
+            <div class="practice-box">
+                <div class="practice-q">✏️ 實戰演練 7：長 25 公尺的梯子靠在垂直牆上，梯腳離牆底 7 公尺。若梯頂下滑了 4 公尺，梯腳向外滑移了多少公尺？</div>
+                <div class="write-blank">【解題歷程與留白處】：下滑後新牆高 = _________ ； 新底距 = _________ ； 梯腳滑動量 = _________________</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 階段 8 -->
+    <div class="stage-box">
+        <div class="stage-header">
+            <span class="stage-title">Stage 8：空間立體對角線與表面展開（🌟 選做挑戰）</span>
+            <span class="stage-star">段考必考指數：⭐⭐⭐</span>
+        </div>
+        <div class="stage-body">
+            <div class="grid-2">
+                <div class="info-pill"><strong>📌 段考怎麼考</strong>：長方體內部空間對角線、長方體表面螞蟻爬行最短路徑。</div>
+                <div class="sop-pill"><strong>⚡ 速解SOP</strong>：長方體內部對角線公式：$d = \sqrt{a^2 + b^2 + c^2}$。螞蟻爬行一律展開成平面直線！</div>
+            </div>
+            <div class="trap-pill"><strong>⚠️ 易錯避坑</strong>：正方體內部對角線長為 $\sqrt{3}a$，底面對角線為 $\sqrt{2}a$，切勿混淆！</div>
+            <div class="practice-box">
+                <div class="practice-q">✏️ 實戰演練 8：長方體長寬高分別為 4、3、12 公分，求其內部空間對角線長？邊長為 4 的正方體內部對角線長為何？</div>
+                <div class="write-blank">【解題歷程與留白處】：長方體對角線 = ______________________ ； 正方體對角線 = ______________________</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 考前 30 秒救命檢查清單 -->
+    <div class="checklist-box">
+        <div style="font-weight: 800; color: #c2410c; margin-bottom: 6px; font-size: 10pt;">
+            🚨 考前 30 秒救命檢查清單（交卷前務必逐一核對，可剪下貼於鉛筆盒）
+        </div>
+        <div class="check-item"><input type="checkbox"> 1. <strong>直角與斜邊確認</strong>：手指直角符號 $\llcorner$，確認對面才是最長斜邊 $c$；求股長時算式是用「減法」嗎？</div>
+        <div class="check-item"><input type="checkbox"> 2. <strong>雙解防漏網</strong>：題目如果只說「直角三角形兩邊為 3 與 4」，答案有寫出「5 或 $\sqrt{7}$」嗎？</div>
+        <div class="check-item"><input type="checkbox"> 3. <strong>逆定理前置檢驗</strong>：判別形狀前，有先檢查「兩小邊之和是否大於第三邊（$a+b>c$）」嗎？</div>
+        <div class="check-item"><input type="checkbox"> 4. <strong>最簡根式化簡</strong>：開根號出來的值有完全化簡嗎？（例如 $\sqrt{72}$ 必須寫成 $6\sqrt{2}$）。</div>
+        <div class="check-item"><input type="checkbox"> 5. <strong>坐標距離負負得正</strong>：計算 $(x_2-x_1)$ 時有小心負數變號嗎？求未知坐標 $x$ 時有寫 $\pm$ 雙解嗎？</div>
+    </div>
+
+</body>
+</html>

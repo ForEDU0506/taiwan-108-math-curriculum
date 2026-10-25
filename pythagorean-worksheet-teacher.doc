@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>【教師詳解與評分配分版】國中數學（二上）畢氏定理與坐標距離實戰學習單</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1.0cm 0.8cm;
+        }
+        body {
+            font-family: 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', sans-serif;
+            color: #1e293b;
+            line-height: 1.45;
+            background: #fff;
+            margin: 0;
+            padding: 16px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2.5px solid #b91c1c;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+        .title {
+            font-size: 16pt;
+            font-weight: 800;
+            margin: 0 0 4px 0;
+            letter-spacing: 0.5px;
+            color: #b91c1c;
+        }
+        .subtitle {
+            font-size: 9.5pt;
+            color: #475569;
+            margin: 0 0 6px 0;
+        }
+        .meta-bar {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10pt;
+            font-weight: 600;
+            border: 1.5px solid #f87171;
+            padding: 5px 12px;
+            border-radius: 6px;
+            background-color: #fef2f2;
+            color: #991b1b;
+        }
+        .action-bar {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        .btn {
+            background: #b91c1c;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            font-size: 9pt;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-outline {
+            background: #fff;
+            color: #0284c7;
+            border: 1.5px solid #0284c7;
+        }
+        @media print {
+            .action-bar { display: none; }
+            body { padding: 0; }
+        }
+        .stage-box {
+            border: 1.2px solid #b91c1c;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            page-break-inside: avoid;
+            background: #ffffff;
+        }
+        .stage-header {
+            background-color: #fef2f2;
+            border-bottom: 1.2px solid #b91c1c;
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .stage-title {
+            font-size: 10.5pt;
+            font-weight: 700;
+            color: #991b1b;
+        }
+        .stage-score {
+            font-size: 9.5pt;
+            color: #b91c1c;
+            font-weight: 800;
+            background: #fee2e2;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .stage-body {
+            padding: 6px 10px;
+        }
+        .sol-box {
+            border: 1px solid #fca5a5;
+            border-radius: 4px;
+            padding: 6px 10px;
+            background-color: #fffaf0;
+            margin-top: 4px;
+            font-size: 9pt;
+        }
+        .sol-ans {
+            color: #b91c1c;
+            font-weight: 800;
+            font-size: 9.5pt;
+        }
+        .rubric-tag {
+            display: inline-block;
+            background: #dcfce7;
+            color: #166534;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 8pt;
+            font-weight: 700;
+            margin-right: 4px;
+        }
+        .deduct-tag {
+            display: inline-block;
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 8pt;
+            font-weight: 700;
+            margin-right: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="action-bar">
+        <button class="btn" onclick="window.print()">🖨️ 一鍵 A4 列印教師詳解版</button>
+        <a class="btn btn-outline" href="pythagorean-worksheet.html">📝 切換學生實戰學習單</a>
+        <a class="btn btn-outline" href="index.html">🏠 返回數學課綱首頁</a>
+    </div>
+
+    <div class="header">
+        <h1 class="title">【教師詳解與評分配分版】國中數學（二上）畢氏定理與坐標距離實戰學習單</h1>
+        <div class="subtitle">依據 108 課綱 S-8-6 與 G-8-1 ‧ 滿分 100 分制 ‧ 階梯給分級距與閱卷防呆標註</div>
+        <div class="meta-bar">
+            <span>適用對象：八年級任課教師 / 命題閱卷小組</span>
+            <span>評量總分：100 分（8 題加權階梯計分）</span>
+            <span>命題審核：Meta AI（元思） ‧ 馮御工程化</span>
+        </div>
+    </div>
+
+    <!-- 階段 1 -->
+    <div class="stage-box">
+        <div class="stage-header">
+            <span class="stage-title">Stage 1：幾何直觀與無字證明（面積守恆）</span>
+            <span class="stage-score">本題滿分：10 分</span>
+        </div>
+        <div class="stage-body">
+            <div><strong>題目</strong>：直角三角形兩直角邊向外所作之正方形面積分別為 18 與 32 平方公分，求以斜邊為邊長的正方形面積？斜邊長為何？</div>
+            <div class="sol-box">
+                <div><span class="sol-ans">【標準答案】</span>：<strong>斜邊正方形面積為 50 平方公分，斜邊長為 $5\sqrt{2}$ 公分。</strong></div>
+                <div style="margin-top: 4px;">
+                    <strong>【完整解析步驟】</strong>：<br>
+                    1. 依畢氏定理面積守恆原理：兩直角邊正方形面積之和 ＝ 斜邊正方形面積。<br>
+                    $$\text{斜邊正方形面積} = 18 + 32 = 50 \text{（平方公分）}$$
+                    2. 斜邊長即為面積為 50 的正方形邊長，開平方取正：
+                    $$\text{斜邊長} = \sqrt{50} = \sqrt{25 \times 2} = 5\sqrt{2} \text{（公分）}$$
+                </div>
+                <div style="margin-top: 4px; border-top: 1px dashed #fca5a5; padding-top: 3px;">
+                    <span class="rubric-tag">階梯給分</span>寫出面積相加得 50 給 5 分；正確開方並化簡為 $5\sqrt{2}$ 給 5 分。<br>
+                    <span class="deduct-tag">常見扣分</span>斜邊長寫 $\sqrt{50}$ 未化為最簡根式扣 2 分；漏寫平方公分或公分單位扣 1 分。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 階段 2 -->
+    <div class="stage-box">
+        <div class="stage-header">
+            <span class="stage-title">Stage 2：符號定義與公式求邊（求斜邊 vs 求股長）</span>
+            <span class="stage-score">本題滿分：12 分</span>
+        </div>
+        <div class="stage-body">
+            <div><strong>題目</strong>：直角三角形斜邊長為 12，其中一股長為 6，求另一股長？</div>
+            <div class="sol-box">
+                <div><span class="sol-ans">【標準答案】</span>：<strong>另一股長為 $6\sqrt{3}$。</strong></div>
+                <div style="margin-top: 4px;">
+                    <strong>【完整解析步驟】</strong>：<br>
+                    1. 依畢氏定理：斜邊長 $c = 12$，已知股 $b = 6$，求另一股 $a$。<br>
+                    2. 套用求股公式（大平方減小平方）：
+                    $$a = \sqrt{c^2 - b^2} = \sqrt{12^2 - 6^2} = \sqrt{144 - 36} = \sqrt{108}$$
+                    3. 化為最簡根式：$\sqrt{108} = \sqrt{36 \times 3} = 6\sqrt{3}$。
+                </div>
+                <div style="margin-top: 4px; border-top: 1px dashed #fca5a5; padding-top: 3px;">
+                    <span class="rubric-tag">階梯給分</span>列出 $\sqrt{12^2 - 6^2}$ 給 5 分；算得 $\sqrt{108}$ 給 3 分；完全化簡為 $6\sqrt{3}$ 給 4 分。<br>
+                    <span class="deduct-tag">嚴重扣分</span>誤用加法算成 $\sqrt{12^2+6^2}=\sqrt{180}$ 該題給 0 分（觀念嚴重混淆）。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 階段 3 -->
+    <div class="stage-box">
+        <div class="stage-header">
+            <span class="stage-title">Stage 3：勾股數與比例縮放（秒殺速解錦囊）</span>
+            <span class="stage-score">本題滿分：14 分</span>
+        </div>
+        <div class="stage-body">
+            <div><strong>題目</strong>：(1) 直角三角形兩直角邊為 2.4 與 3.2，求斜邊長？ (2) 直角三角形兩邊長為 6 與 8，求第三邊？</div>
+            <div class="sol-box">
+                <div><span class="sol-ans">【標準答案】</span>：<strong>(1) 斜邊長為 4.0 (或 4) ； (2) 第三邊長可能為 10 或 $2\sqrt{7}$（雙解）。</strong></div>
+                <div style="margin-top: 4px;">
+                    <strong>【完整解析步驟】</strong>：<br>
+                    (1) 觀察兩股比例：$2.4 : 3.2 = 3 : 4$。由經典勾股數 $3:4:5$，斜邊必為 $5 \times 0.8 = 4$。<br>
+                    (2) 題目未言明 8 是股長還是斜邊，必須討論：<br>
+                    - 若 8 是股長 ➔ 斜邊 $c = \sqrt{6^2 + 8^2} = \sqrt{100} = 10$。<br>
+                    - 若 8 是斜邊 ➔ 另一股 $a = \sqrt{8^2 - 6^2} = \sqrt{64 - 36} = \sqrt{28} = 2\sqrt{7}$。
+                </div>
+                <div style="margin-top: 4px; border-top: 1px dashed #fca5a5; padding-top: 3px;">
+                    <span class="rubric-tag">階梯給分</span>第(1)小題 5 分；第(2)小題寫出 10 得 4 分，完整寫出 10 或 $2\sqrt{7}$ 得 9 分。<br>
+                    <span class="deduct-tag">常見扣分</span>第(2)小題漏掉 $2\sqrt{7}$ 扣 5 分（未考慮 8 為斜邊之可能）。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 階段 4 -->
+    <div class="stage-box">
+        <div class="stage-header">
+            <span class="stage-title">Stage 4：特殊直角三角形邊長比（45-45-90 與 30-60-90）</span>
+            <span class="stage-score">本題滿分：12 分</span>
+        </div>
+        <div class="stage-body">
+            <div><strong>題目</strong>：(1) 等腰直角三角形斜邊長為 8，求兩股長？ (2) 邊長為 10 的正三角形其高與面積各為何？</div>
+            <div class="sol-box">
+                <div><span class="sol-ans">【標準答案】</span>：<strong>(1) 股長為 $4\sqrt{2}$ ； (2) 高為 $5\sqrt{3}$，面積為 $25\sqrt{3}$。</strong></div>
+                <div style="margin-top: 4px;">
+                    <strong>【完整解析步驟】</strong>：<br>
+                    (1) 等腰直角三角形邊長比 $1:1:\sqrt{2}$。股長 = $\frac{8}{\sqrt{2}} = \frac{8\sqrt{2}}{2} = 4\sqrt{2}$。<br>
+                    (2) 正三角形的高 $h = \frac{\sqrt{3}}{2} \times 10 = 5\sqrt{3}$。<br>
+                    面積 $A = \frac{\sqrt{3}}{4} \times 10^2 = \frac{\sqrt{3}}{4} \times 100 = 25\sqrt{3}$。
+                </div>
+                <div style="margin-top: 4px; border-top: 1px dashed #fca5a5; padding-top: 3px;">
+                    <span class="rubric-tag">階梯給分</span>第(1)小題有理化正確得 5 分；第(2)小題高得 3 分，面積得 4 分。<br>
+                    <span class="deduct-tag">常見扣分</span>第(1)小題寫 $\frac{8}{\sqrt{2}}$ 未做分母有理化扣 2 分。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 階段 5 -->
+    <div class="stage-box">
+        <div class="stage-header">
+            <span class="stage-title">Stage 5：逆定理與三角形形狀判別</span>
+            <span class="stage-score">本題滿分：12 分</span>
+        </div>
+        <div class="stage-body">
+            <div><strong>題目</strong>：請判斷下列各組三邊長所構成的圖形：甲(3, 4, 6)、乙(5, 12, 13)、丙(2, 3, 5)。</div>
+            <div class="sol-box">
+                <div><span class="sol-ans">【標準答案】</span>：<strong>甲為鈍角三角形；乙為直角三角形；丙為不能形成三角形。</strong></div>
+                <div style="margin-top: 4px;">
+                    <strong>【完整解析步驟】</strong>：<br>
+                    - 甲：$3+4=7>6$ 可成三角形。$3^2+4^2 = 9+16 = 25 < 6^2 = 36$ ➔ <strong>鈍角三角形</strong>。<br>
+                    - 乙：$5+12=17>13$ 可成三角形。$5^2+12^2 = 25+144 = 169 = 13^2$ ➔ <strong>直角三角形</strong>。<br>
+                    - 丙：兩短邊之和 $2 + 3 = 5$ 未大於第三邊 5，不滿足三角形不等式 ➔ <strong>不能形成三角形</strong>。
+                </div>
+                <div style="margin-top: 4px; border-top: 1px dashed #fca5a5; padding-top: 3px;">
+                    <span class="rubric-tag">階梯給分</span>甲、乙、丙每小題各 4 分，需寫出理由或算式。<br>
+                    <span class="deduct-tag">重大盲點</span>丙誤算 $2^2+3^2=13<5^2=25$ 寫鈍角三角形者該小題 0 分（忽略三角形形成前置條件）。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 階段 6 -->
+    <div class="stage-box">
+        <div class="stage-header">
+            <span class="stage-title">Stage 6：直角坐標系兩點距離公式（G-8-1）</span>
+            <span class="stage-score">本題滿分：14 分</span>
+        </div>
+        <div class="stage-body">
+            <div><strong>題目</strong>：(1) 求平面上兩點 $A(-2, 5)$ 與 $B(4, -3)$ 的線段長度？ (2) 若 $P(x, 3)$ 到原點距離為 5，求 $x$？</div>
+            <div class="sol-box">
+                <div><span class="sol-ans">【標準答案】</span>：<strong>(1) $AB = 10$ ； (2) $x = 4$ 或 $-4$（即 $x = \pm 4$）。</strong></div>
+                <div style="margin-top: 4px;">
+                    <strong>【完整解析步驟】</strong>：<br>
+                    (1) 水平跨度 $\Delta x = 4 - (-2) = 6$；垂直跨度 $\Delta y = -3 - 5 = -8$。<br>
+                    $$AB = \sqrt{6^2 + (-8)^2} = \sqrt{36 + 64} = \sqrt{100} = 10$$<br>
+                    (2) 點 $P$ 到原點距離公式：$OP = \sqrt{x^2 + 3^2} = 5$。<br>
+                    兩邊平方：$x^2 + 9 = 25 \implies x^2 = 16 \implies x = \pm 4$。
+                </div>
+                <div style="margin-top: 4px; border-top: 1px dashed #fca5a5; padding-top: 3px;">
+                    <span class="rubric-tag">階梯給分</span>第(1)小題 7 分；第(2)小題寫出 $x=\pm 4$ 得 7 分。<br>
+                    <span class="deduct-tag">常見扣分</span>第(2)小題漏掉負號只寫 $x=4$ 扣 3 分。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 階段 7 -->
+    <div class="stage-box">
+        <div class="stage-header">
+            <span class="stage-title">Stage 7：生活素養 梯子滑落與折竹經典</span>
+            <span class="stage-score">本題滿分：14 分</span>
+        </div>
+        <div class="stage-body">
+            <div><strong>題目</strong>：長 25 公尺的梯子靠在垂直牆上，梯腳離牆底 7 公尺。若梯頂下滑了 4 公尺，梯腳向外滑移了多少公尺？</div>
+            <div class="sol-box">
+                <div><span class="sol-ans">【標準答案】</span>：<strong>梯腳向外滑移了 8 公尺。</strong></div>
+                <div style="margin-top: 4px;">
+                    <strong>【完整解析步驟】</strong>：<br>
+                    1. <strong>滑落前</strong>：梯長 $L = 25$，底距 $a_1 = 7$。原本牆高 $b_1 = \sqrt{25^2 - 7^2} = 24$ 公尺。<br>
+                    2. <strong>滑落後</strong>：梯頂下滑 4 公尺 ➔ 新牆高 $b_2 = 24 - 4 = 20$ 公尺。梯長仍為 25 公尺。<br>
+                    新底距 $a_2 = \sqrt{25^2 - 20^2} = \sqrt{625 - 400} = \sqrt{225} = 15$ 公尺。<br>
+                    3. <strong>計算滑移量</strong>：$\Delta a = 15 - 7 = 8$ 公尺。
+                </div>
+                <div style="margin-top: 4px; border-top: 1px dashed #fca5a5; padding-top: 3px;">
+                    <span class="rubric-tag">階梯給分</span>算出原牆高 24 得 4 分；算出新底距 15 得 5 分；相減得 8 公尺得 5 分。<br>
+                    <span class="deduct-tag">嚴重直覺錯誤</span>直覺寫梯腳也滑動 4 公尺者給 0 分（未掌握非線性物理模型）。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 階段 8 -->
+    <div class="stage-box">
+        <div class="stage-header">
+            <span class="stage-title">Stage 8：空間立體對角線與表面展開（🌟 選做挑戰）</span>
+            <span class="stage-score">本題滿分：12 分</span>
+        </div>
+        <div class="stage-body">
+            <div><strong>題目</strong>：長方體長寬高分別為 4、3、12 公分，求其內部空間對角線長？邊長為 4 的正方體內部對角線長為何？</div>
+            <div class="sol-box">
+                <div><span class="sol-ans">【標準答案】</span>：<strong>長方體對角線為 13 公分 ； 正方體對角線為 $4\sqrt{3}$ 公分。</strong></div>
+                <div style="margin-top: 4px;">
+                    <strong>【完整解析步驟】</strong>：<br>
+                    1. 長方體空間內部對角線公式：
+                    $$d = \sqrt{4^2 + 3^2 + 12^2} = \sqrt{16 + 9 + 144} = \sqrt{169} = 13 \text{（公分）}$$<br>
+                    2. 正方體內部對角線公式：$d = \sqrt{a^2 + a^2 + a^2} = \sqrt{3}a = 4\sqrt{3}$ 公分。
+                </div>
+                <div style="margin-top: 4px; border-top: 1px dashed #fca5a5; padding-top: 3px;">
+                    <span class="rubric-tag">階梯給分</span>長方體算出 13 得 6 分；正方體寫出 $4\sqrt{3}$ 得 6 分。<br>
+                    <span class="deduct-tag">常見扣分</span>正方體誤寫為底面對角線 $4\sqrt{2}$ 扣 3 分。
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
