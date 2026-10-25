@@ -639,6 +639,44 @@
       .main-content { padding: 20px 16px; }
       .companion-hud { right: 12px; bottom: 12px; width: calc(100vw - 24px); }
     }
+
+    @media (max-width: 768px) {
+      .topbar {
+        padding: 8px 14px;
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .brand {
+        font-size: 1.02rem;
+      }
+      .top-nav {
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 4px;
+        gap: 6px;
+      }
+      .top-nav a, .top-nav button {
+        padding: 4px 10px;
+        font-size: 0.8rem;
+        flex-shrink: 0;
+      }
+      .hero-title {
+        font-size: 1.35rem;
+      }
+      .hero-banner {
+        padding: 20px 16px;
+      }
+      .section-card {
+        padding: 18px 14px;
+      }
+      .diagram-container svg {
+        max-width: 100%;
+        height: auto;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1051,7 +1089,7 @@
             <button type="button" class="symbol-btn" style="background:#fee2e2; color:#b91c1c;" onclick="clearInput('ans5_s1')">⌫ 清除</button>
           </div>
           <div class="exercise-input-row">
-            <input type="text" class="answer-input" id="ans5_s1" placeholder="若4為股則為5；若4為斜邊則為√7" />
+            <input type="text" class="answer-input" id="ans5_s1" placeholder="例如: 10 或 2√7 (注意是否有雙解)" />
             <button class="btn-check" onclick="checkAnswer('ans5_s1', ["5, √7", "5,√7", "√7, 5", "5或√7"], 'fb5_s1')">驗證答案</button>
             <button type="button" class="btn-reroll" onclick="rerollExercise('card_ex5_s1')">🎲 換數字再練</button>
           </div>
@@ -1696,7 +1734,7 @@
               <text x="110" y="130" font-size="12" font-weight="bold" fill="#ea580c">新長 L=25</text>
               <text x="48" y="60" font-size="11" font-weight="bold" fill="#b91c1c">下滑4m</text>
               <text x="120" y="205" font-size="11" font-weight="bold" fill="#ea580c">新底 d₂=15 (外移8m)</text>
-              <text x="25" y="15" font-size="12" font-weight="bold" fill="#0f172a">圖 7-1：梯子靠牆下滑連鎖題</text>
+              <text x="25" y="15" font-size="12" font-weight="bold" fill="#0f172a">圖 4-1：梯子靠牆下滑連鎖題</text>
             </svg>
           </div>
 
@@ -1713,7 +1751,7 @@
               <text x="35" y="145" font-size="12" font-weight="bold" fill="#14532d">高 x</text>
               <text x="120" y="135" font-size="12" font-weight="bold" fill="#14532d">斜邊 (H - x)</text>
               <text x="105" y="205" font-size="12" font-weight="bold" fill="#14532d">地距 d</text>
-              <text x="35" y="25" font-size="12" font-weight="bold" fill="#0f172a">圖 7-2：《九章算術》折竹著地</text>
+              <text x="35" y="25" font-size="12" font-weight="bold" fill="#0f172a">圖 4-2：《九章算術》折竹著地</text>
               <text x="45" y="55" font-size="12" fill="#047857">x² + d² = (H - x)²</text>
             </svg>
           </div>
@@ -1735,11 +1773,11 @@
               <line x1="50" y1="170" x2="90" y2="120" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3" />
               <!-- 底面對角線 -->
               <line x1="50" y1="170" x2="210" y2="120" stroke="#16a34a" stroke-width="2" stroke-dasharray="4" />
-              <text x="120" y="160" font-size="11" fill="#16a34a">d_底=√(a²+b²)</text>
+              <text x="110" y="160" font-size="11" fill="#16a34a">d(底) = √(a²+b²)</text>
               <!-- 空間內部對角線 (紅線) -->
               <line x1="50" y1="170" x2="210" y2="40" stroke="#dc2626" stroke-width="3" />
               <text x="75" y="80" font-size="12" font-weight="bold" fill="#dc2626">D = √(a²+b²+c²)</text>
-              <text x="35" y="200" font-size="12" font-weight="bold" fill="#0f172a">圖 8-1：長方體空間立體對角線</text>
+              <text x="35" y="200" font-size="12" font-weight="bold" fill="#0f172a">圖 4-3：長方體空間立體對角線</text>
             </svg>
           </div>
 
@@ -1757,7 +1795,7 @@
               <text x="80" y="170" font-size="11" fill="#0369a1">底面周長 (2πr = 6)</text>
               <text x="225" y="100" font-size="11" fill="#0369a1">柱高 (h=8)</text>
               <text x="80" y="85" font-size="12" font-weight="bold" fill="#dc2626">最短路徑 = √(6²+8²) = 10</text>
-              <text x="45" y="200" font-size="12" font-weight="bold" fill="#0f172a">圖 8-2：圓柱表面展開最短路徑</text>
+              <text x="45" y="200" font-size="12" font-weight="bold" fill="#0f172a">圖 4-4：圓柱表面展開最短路徑</text>
             </svg>
           </div>
         </div>
@@ -2639,15 +2677,11 @@
         this.currentStage = stId;
         const label = document.getElementById('hudStageLabel');
         const stageNames = {
-          'stage1': '📍 階段 1：幾何直觀與無字證明',
-          'stage2': '📍 階段 2：符號定義與求邊',
-          'stage3': '📍 階段 3：勾股數與比例縮放',
-          'stage4': '📍 階段 4：特殊角邊長比',
-          'stage5': '📍 階段 5：逆定理與形狀判定',
-          'stage6': '📍 階段 6：坐標兩點距離公式',
-          'stage7': '📍 階段 7：生活情境素養題',
-          'stage8': '📍 階段 8：空間對角線與展開圖',
-          'stage-capstone': '📍 綜合會考大題'
+          'stage1': '📍 階段 1：幾何直觀與基本求邊',
+          'stage2': '📍 階段 2：勾股數縮放與特殊角邊比',
+          'stage3': '📍 階段 3：逆定理判定與坐標系距離',
+          'stage4': '📍 階段 4：生活情境建模與空間展開',
+          'stage-capstone': '🏆 綜合會考大題'
         };
         if (label && stageNames[stId]) {
           label.innerText = stageNames[stId];
@@ -2656,14 +2690,10 @@
 
       requestHint() {
         const hints = {
-          'stage1': '利用面積守恆：兩直角邊正方形面積相加等於斜邊正方形面積！求邊長記得開根號！',
-          'stage2': '求斜邊用加法：c=√(a²+b²)；求股長用減法：b=√(c²-a²)！沒說誰是斜邊要有雙解準備！',
-          'stage3': '先約分找比例！3:4:5、5:12:13、7:24:25、8:15:17、9:40:41，算出第三邊再放大！',
-          'stage4': '45-45-90 是 1:1:√2；30-60-90 是 1:√3:2（斜邊是 2，不是 √3 喔！）',
-          'stage5': '先看 a+b 是否大於 c！滿足後再算 a²+b² 與 c²：大於銳角、等於直角、小於鈍角！',
-          'stage6': '兩點距離是水平跨度與垂直跨度做畢氏定理：d = √((x2-x1)² + (y2-y1)²)，負負得正小心算！',
-          'stage7': '梯子下滑題記住斜邊長不變！先算原高再算新高，求出兩次底距後相減！',
-          'stage8': '立體空間對角線是長寬高三者平方和開根號：√(a²+b²+c²)；表面爬行一定要畫展開圖！',
+          'stage1': '利用面積守恆：兩直角邊正方形面積相加等於斜邊正方形面積！求邊長記得開根號！沒指定斜邊時要有雙解準備！',
+          'stage2': '先約分找比例！3:4:5、5:12:13 等，算出第三邊再放大！45-45-90 是 1:1:√2；30-60-90 是 1:√3:2（斜邊永遠是 2！）',
+          'stage3': '步驟 0 先看 a+b 是否大於 c！兩短邊大於最長邊才能成三角形。滿足後再算 a²+b² 與 c²：大於銳角、等於直角、小於鈍角！',
+          'stage4': '梯子下滑題記住斜邊長不變，絕非等量滑落！立體表面爬行一定要畫展開圖連直線！',
           'stage-capstone': '跨單元素養題沉著應戰，運用前面的速解公式逐步破題！'
         };
         const h = hints[this.currentStage] || '先畫圖釐清直角與三邊關係！';
@@ -2681,9 +2711,245 @@
     // 頁面載入初始化
     document.addEventListener('DOMContentLoaded', () => {
       goToStage('stage1');
+      if (typeof updateLab1 === 'function') updateLab1();
+      if (typeof updateLab2 === 'function') updateLab2();
+      if (typeof updateLab3 === 'function') updateLab3();
+      if (typeof updateLab4 === 'function') updateLab4();
     });
-  </script>
 
-" + get_labs_script() + "
+    // ===== 偉想審查修復：四大互動實驗室 JavaScript 引擎 =====
+    // LAB 1: 面積守恆動態滑桿
+    function updateLab1() {
+      var aEl = document.getElementById('lab1_slider_a');
+      var bEl = document.getElementById('lab1_slider_b');
+      if (!aEl || !bEl) return;
+      var a = parseInt(aEl.value);
+      var b = parseInt(bEl.value);
+      var valA = document.getElementById('lab1_val_a');
+      var valB = document.getElementById('lab1_val_b');
+      if (valA) valA.innerText = a;
+      if (valB) valB.innerText = b;
+
+      var areaA = a * a;
+      var areaB = b * b;
+      var areaC = areaA + areaB;
+      var c = Math.sqrt(areaC).toFixed(2);
+
+      var svg = document.getElementById('lab1_svg');
+      if (!svg) return;
+      var scale = 14;
+      var originX = 110;
+      var originY = 150;
+      var triW = b * scale;
+      var triH = a * scale;
+
+      svg.innerHTML = `
+        <polygon points="${originX},${originY} ${originX + triW},${originY} ${originX},${originY - triH}" fill="#bae6fd" stroke="#0284c7" stroke-width="2.5" />
+        <polyline points="${originX},${originY - 12} ${originX + 12},${originY - 12} ${originX + 12},${originY}" fill="none" stroke="#0284c7" stroke-width="1.5" />
+        <rect x="${originX - triH}" y="${originY - triH}" width="${triH}" height="${triH}" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5" opacity="0.85" />
+        <text x="${originX - triH/2}" y="${originY - triH/2 + 5}" font-size="11" font-weight="bold" fill="#9a3412" text-anchor="middle">A = ${areaA}</text>
+        <rect x="${originX}" y="${originY}" width="${triW}" height="${triW}" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5" opacity="0.85" />
+        <text x="${originX + triW/2}" y="${originY + triW/2 + 5}" font-size="11" font-weight="bold" fill="#854d0e" text-anchor="middle">B = ${areaB}</text>
+        <text x="140" y="210" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">面積守恆：${areaA} + ${areaB} = ${areaC}</text>
+      `;
+
+      var statsEl = document.getElementById('lab1_stats');
+      if (statsEl) {
+        statsEl.innerHTML = `
+          <div><strong>直角邊：</strong>a = ${a} (a² = ${areaA})，b = ${b} (b² = ${areaB})</div>
+          <div><strong>斜邊長：</strong>c = √(${areaA} + ${areaB}) = √${areaC} ≈ <strong>${c}</strong></div>
+          <div style="color:#16a34a; font-weight:800; margin-top:3px;">驗證：面積 A (${areaA}) + 面積 B (${areaB}) = 斜邊面積 C (${areaC}) 恆成立！</div>
+        `;
+      }
+    }
+    function setLab1Preset(a, b) {
+      var aEl = document.getElementById('lab1_slider_a');
+      var bEl = document.getElementById('lab1_slider_b');
+      if (aEl && bEl) {
+        aEl.value = a;
+        bEl.value = b;
+        updateLab1();
+      }
+    }
+
+    // LAB 2: 勾股數縮放與特殊角邊長比
+    var lab2CurrentBase = '3-4-5';
+    function setLab2Base(type) {
+      lab2CurrentBase = type;
+      updateLab2();
+    }
+    function updateLab2() {
+      var kEl = document.getElementById('lab2_slider_k');
+      if (!kEl) return;
+      var k = parseFloat(kEl.value);
+      var valK = document.getElementById('lab2_val_k');
+      if (valK) valK.innerText = k.toFixed(1) + ' 倍';
+
+      var baseA, baseB, baseC, nameStr;
+      if (lab2CurrentBase === '3-4-5') {
+        baseA = 3; baseB = 4; baseC = 5; nameStr = '(3, 4, 5) 黃金三邊';
+      } else if (lab2CurrentBase === '5-12-13') {
+        baseA = 5; baseB = 12; baseC = 13; nameStr = '(5, 12, 13) 常用勾股數';
+      } else if (lab2CurrentBase === '7-24-25') {
+        baseA = 7; baseB = 24; baseC = 25; nameStr = '(7, 24, 25) 梯子常客';
+      } else if (lab2CurrentBase === '45-45') {
+        baseA = 4; baseB = 4; baseC = 4 * Math.SQRT2; nameStr = '45°-45°-90° (1 : 1 : √2)';
+      } else {
+        baseA = 4; baseB = 4 * Math.sqrt(3); baseC = 8; nameStr = '30°-60°-90° (1 : √3 : 2)';
+      }
+
+      var curA = (baseA * k).toFixed(1);
+      var curB = (baseB * k).toFixed(1);
+      var curC = (baseC * k).toFixed(1);
+
+      var svg = document.getElementById('lab2_svg');
+      if (!svg) return;
+      var maxLen = Math.max(baseA, baseB);
+      var normScale = 120 / maxLen * (k / 1.8);
+      var originX = 50;
+      var originY = 170;
+      var w = baseB * normScale;
+      var h = baseA * normScale;
+
+      svg.innerHTML = `
+        <polygon points="${originX},${originY} ${originX + w},${originY} ${originX},${originY - h}" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5" />
+        <polyline points="${originX},${originY - 10} ${originX + 10},${originY - 10} ${originX + 10},${originY}" fill="none" stroke="#16a34a" stroke-width="1.5" />
+        <text x="${originX - 10}" y="${originY - h/2}" font-size="11" font-weight="bold" fill="#15803d" text-anchor="end">${curA}</text>
+        <text x="${originX + w/2}" y="${originY + 16}" font-size="11" font-weight="bold" fill="#15803d" text-anchor="middle">${curB}</text>
+        <text x="${originX + w/2 + 5}" y="${originY - h/2}" font-size="11" font-weight="bold" fill="#b45309" text-anchor="start">斜邊 = ${curC}</text>
+        <text x="140" y="205" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">${nameStr} × ${k.toFixed(1)}</text>
+      `;
+
+      var statsEl = document.getElementById('lab2_stats');
+      if (statsEl) {
+        statsEl.innerHTML = `
+          <div><strong>基準模型：</strong>${nameStr}</div>
+          <div><strong>放大後邊長：</strong>a = ${curA}，b = ${curB}，斜邊 c = <strong>${curC}</strong></div>
+          <div style="color:#0284c7; font-weight:700; margin-top:2px;">秒殺心法：段考大數字先約分找比例，求出後再乘回 k 倍！</div>
+        `;
+      }
+    }
+
+    // LAB 3: 夾角動態開闔器
+    function updateLab3() {
+      var sliderEl = document.getElementById('lab3_slider_deg');
+      if (!sliderEl) return;
+      var deg = parseInt(sliderEl.value);
+      var rad = deg * Math.PI / 180;
+      var a = 6;
+      var b = 8;
+      var cSq = (a * a + b * b - 2 * a * b * Math.cos(rad));
+      var c = Math.sqrt(cSq).toFixed(2);
+
+      var typeStr, colorStr;
+      if (deg < 90) {
+        typeStr = '銳角三角形 (c² < a² + b²)';
+        colorStr = '#16a34a';
+      } else if (deg === 90) {
+        typeStr = '直角三角形 (c² = a² + b² = 100，畢氏定理)';
+        colorStr = '#0284c7';
+      } else {
+        typeStr = '鈍角三角形 (c² > a² + b²)';
+        colorStr = '#dc2626';
+      }
+
+      var degValEl = document.getElementById('lab3_val_deg');
+      if (degValEl) degValEl.innerHTML = `<span style="color:${colorStr}; font-weight:800;">${deg}°</span>`;
+
+      var svg = document.getElementById('lab3_svg');
+      if (!svg) return;
+      var originX = 90;
+      var originY = 140;
+      var scale = 11;
+      var bX = originX + b * scale;
+      var bY = originY;
+      var aX = originX + a * scale * Math.cos(Math.PI - rad);
+      var aY = originY - a * scale * Math.sin(Math.PI - rad);
+
+      svg.innerHTML = `
+        <polygon points="${originX},${originY} ${bX},${bY} ${aX},${aY}" fill="${colorStr}18" stroke="${colorStr}" stroke-width="2.5" />
+        <line x1="${originX}" y1="${originY}" x2="${bX}" y2="${bY}" stroke="#334155" stroke-width="2" />
+        <line x1="${originX}" y1="${originY}" x2="${aX}" y2="${aY}" stroke="#334155" stroke-width="2" />
+        <line x1="${bX}" y1="${bY}" x2="${aX}" y2="${aY}" stroke="${colorStr}" stroke-width="2.5" stroke-dasharray="${deg===90?'none':'4'}" />
+        <text x="${originX - 10}" y="${originY + 14}" font-size="11" fill="#475569">夾角 ${deg}°</text>
+        <text x="${(bX+aX)/2 + 10}" y="${(bY+aY)/2}" font-size="11" font-weight="bold" fill="${colorStr}">c = ${c}</text>
+        <text x="140" y="205" font-size="11" font-weight="bold" fill="${colorStr}" text-anchor="middle">${typeStr}</text>
+      `;
+
+      var statsEl = document.getElementById('lab3_stats');
+      if (statsEl) {
+        statsEl.innerHTML = `
+          <div><strong>固定邊平方和：</strong>a² + b² = 6² + 8² = <strong>100</strong></div>
+          <div><strong>對邊長平方：</strong>c = ${c} (c² ≈ <strong>${cSq.toFixed(1)}</strong>)</div>
+          <div style="color:${colorStr}; font-weight:800; margin-top:2px;">
+            判定狀態：${deg < 90 ? '100 > c² ➜ 銳角' : (deg === 90 ? '100 = c² ➜ 直角 (畢氏成立)' : '100 < c² ➜ 鈍角')}
+          </div>
+        `;
+      }
+    }
+    function setLab3Deg(d) {
+      var sliderEl = document.getElementById('lab3_slider_deg');
+      if (sliderEl) {
+        sliderEl.value = d;
+        updateLab3();
+      }
+    }
+
+    // LAB 4: 梯子下滑連鎖模擬器
+    function updateLab4() {
+      var sliderEl = document.getElementById('lab4_slider_dh');
+      if (!sliderEl) return;
+      var dh = parseInt(sliderEl.value);
+      var valEl = document.getElementById('lab4_val_dh');
+      if (valEl) valEl.innerText = dh + ' 公尺';
+
+      var L = 25;
+      var origH = 24;
+      var origD = 7;
+      var curH = origH - dh;
+      var curD = Math.sqrt(L * L - curH * curH);
+      var dd = (curD - origD).toFixed(2);
+
+      var svg = document.getElementById('lab4_svg');
+      if (!svg) return;
+      var scale = 6.5;
+      var wallX = 60;
+      var floorY = 170;
+      var origTopY = floorY - origH * scale;
+      var origFootX = wallX + origD * scale;
+      var curTopY = floorY - curH * scale;
+      var curFootX = wallX + curD * scale;
+
+      svg.innerHTML = `
+        <line x1="${wallX}" y1="10" x2="${wallX}" y2="${floorY}" stroke="#64748b" stroke-width="4" />
+        <line x1="${wallX}" y1="${floorY}" x2="270" y2="${floorY}" stroke="#64748b" stroke-width="4" />
+        <line x1="${wallX}" y1="${origTopY}" x2="${origFootX}" y2="${floorY}" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4" />
+        <line x1="${wallX}" y1="${curTopY}" x2="${curFootX}" y2="${floorY}" stroke="#ea580c" stroke-width="3.5" />
+        <line x1="${wallX - 8}" y1="${origTopY}" x2="${wallX - 8}" y2="${curTopY}" stroke="#dc2626" stroke-width="2" />
+        <text x="${wallX - 12}" y="${(origTopY + curTopY)/2 + 4}" font-size="10" font-weight="bold" fill="#dc2626" text-anchor="end">Δh = ${dh}m</text>
+        <line x1="${origFootX}" y1="${floorY + 12}" x2="${curFootX}" y2="${floorY + 12}" stroke="#16a34a" stroke-width="2" />
+        <text x="${(origFootX + curFootX)/2}" y="${floorY + 24}" font-size="10" font-weight="bold" fill="#16a34a" text-anchor="middle">Δd = ${dd}m</text>
+        <text x="160" y="30" font-size="11" font-weight="bold" fill="#ea580c">梯長 L = 25m 固定</text>
+      `;
+
+      var statsEl = document.getElementById('lab4_stats');
+      if (statsEl) {
+        statsEl.innerHTML = `
+          <div><strong>梯頂高度：</strong>24m ➔ <strong>${curH}m</strong>（下滑 Δh = ${dh}m）</div>
+          <div><strong>梯腳底距：</strong>7m ➔ <strong>${curD.toFixed(1)}m</strong>（外移 Δd = <strong>${dd}m</strong>）</div>
+          <div style="color:${dh===4?'#b91c1c':'#0284c7'}; font-weight:800; margin-top:2px;">
+            ${dh===4 ? '🚨 防呆警示：下滑 4 公尺，梯腳外移 8 公尺！絕非等量外移！' : '關鍵：梯長固定為斜邊，底距以減法開方計算！'}
+          </div>
+        `;
+      }
+    }
+    function setLab4Dh(val) {
+      var sliderEl = document.getElementById('lab4_slider_dh');
+      if (sliderEl) {
+        sliderEl.value = val;
+        updateLab4();
+      }
+    }
+  </script>
 </body>
 </html>
