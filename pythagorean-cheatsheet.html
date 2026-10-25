@@ -258,21 +258,42 @@
       gap: 10px;
       font-size: 0.92rem;
       color: #78350f;
+      cursor: pointer;
+      padding: 6px 8px;
+      border-radius: 8px;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .check-item:hover {
+      background: rgba(251, 191, 36, 0.25);
+    }
+
+    .check-item.checked {
+      color: #047857;
     }
 
     .check-box {
-      width: 20px;
-      height: 20px;
-      border-radius: 4px;
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
       border: 2px solid #d97706;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      margin-top: 2px;
-      font-size: 0.8rem;
+      margin-top: 1px;
+      font-size: 0.85rem;
       font-weight: 900;
-      color: #d97706;
+      color: transparent;
+      background: #fff;
+      transition: all 0.2s;
+    }
+
+    .check-item.checked .check-box {
+      background: #10b981;
+      border-color: #10b981;
+      color: #fff;
     }
 
     @media print {
@@ -538,40 +559,71 @@
       </div>
     </div>
 
-    <!-- 考前 30 秒救命檢查清單 -->
+    <!-- 考前 30 秒救命檢查清單 (元思建議：互動式可勾選儀式感 Checklist) -->
     <div class="checklist-card">
-      <div class="checklist-title">
-        <span>⏱️</span>
-        <span>考前 30 秒救命檢查清單 (Pre-Exam 30s Checklist)</span>
+      <div class="checklist-title" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span>⏱️</span>
+          <span>考前 30 秒救命檢查清單 (Pre-Exam 30s Checklist)</span>
+        </div>
+        <div id="checkProgress" style="font-size:0.85rem; background:#fff; padding:4px 12px; border-radius:999px; border:1px solid #f59e0b; color:#b45309; font-weight:800;">
+          已確認 0 / 6 項
+        </div>
       </div>
       <div class="checklist-items">
-        <div class="check-item">
+        <div class="check-item" onclick="toggleCheck(this)">
           <div class="check-box">✓</div>
           <div><strong>雙解檢查：</strong>若題目寫「直角三角形兩邊長為 a, b」，沒指明斜邊，一定要檢查是否有兩個答案！</div>
         </div>
-        <div class="check-item">
+        <div class="check-item" onclick="toggleCheck(this)">
           <div class="check-box">✓</div>
           <div><strong>成三角形檢查：</strong>判斷形狀前，先確認 $a+b > c$ 是否成立！</div>
         </div>
-        <div class="check-item">
+        <div class="check-item" onclick="toggleCheck(this)">
           <div class="check-box">✓</div>
           <div><strong>30°-60°-90° 檢查：</strong>斜邊必須是最短直角邊的 2 倍，絕不能寫成 $\sqrt{3}$ 倍！</div>
         </div>
-        <div class="check-item">
+        <div class="check-item" onclick="toggleCheck(this)">
           <div class="check-box">✓</div>
           <div><strong>坐標相減負號：</strong>兩點距離公式中，遇到負坐標 $(x_2 - x_1)$ 記得負負得正！</div>
         </div>
-        <div class="check-item">
+        <div class="check-item" onclick="toggleCheck(this)">
           <div class="check-box">✓</div>
           <div><strong>根式最簡化：</strong>計算結果若含有根號，務必提出完全平方數化為最簡根式！</div>
         </div>
-        <div class="check-item">
+        <div class="check-item" onclick="toggleCheck(this)">
           <div class="check-box">✓</div>
           <div><strong>梯子長度固定：</strong>梯子下滑情境中，前後兩個直角三角形的「斜邊長」永遠相等！</div>
         </div>
       </div>
+      <div id="checkCelebration" style="display:none; margin-top:16px; padding:12px 18px; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:10px; color:#065f46; font-weight:800; text-align:center;">
+        🎉 6 項避坑檢查全部確認完成！畢氏定理核心觀念已全面通關，信心滿滿上考場！
+      </div>
     </div>
   </div>
 
+  <script>
+    function toggleCheck(el) {
+      el.classList.toggle('checked');
+      const items = document.querySelectorAll('.check-item');
+      const checked = document.querySelectorAll('.check-item.checked');
+      const prog = document.getElementById('checkProgress');
+      const celeb = document.getElementById('checkCelebration');
+      if (prog) {
+        prog.innerText = `已確認 ${checked.length} / ${items.length} 項`;
+        if (checked.length === items.length) {
+          prog.style.background = '#10b981';
+          prog.style.color = '#fff';
+          prog.style.borderColor = '#10b981';
+          if (celeb) celeb.style.display = 'block';
+        } else {
+          prog.style.background = '#fff';
+          prog.style.color = '#b45309';
+          prog.style.borderColor = '#f59e0b';
+          if (celeb) celeb.style.display = 'none';
+        }
+      }
+    }
+  </script>
 </body>
 </html>

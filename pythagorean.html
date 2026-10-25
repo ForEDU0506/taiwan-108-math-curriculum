@@ -1449,6 +1449,32 @@
       <div class="section-card">
         <h2>🔬 本階段可操作探究歷程（動手實驗室）</h2>
         
+        <!-- 元思審查建議落地：步驟 0 檢驗與形狀判別決策樹互動小卡 -->
+        <div class="inquiry-callout" style="background: linear-gradient(135deg, #fef2f2 0%, #fff1f2 100%); border-left: 5px solid #ef4444; margin-bottom: 24px;">
+          <div class="inquiry-title" style="color: #991b1b; font-size: 1.05rem;">
+            <span>🛡️ 元思教學法防呆小卡：逆定理判別前置「步驟 0」檢驗</span>
+          </div>
+          <p style="font-size: 0.92rem; color: #7f1d1d; margin-bottom: 12px;">
+            段考最常考的致命陷阱題：<strong>「已知三邊長為 2, 3, 5，此三角形為鈍角三角形嗎？」</strong><br>
+            現場學生常直接算 $2^2 + 3^2 = 13 < 5^2 = 25$ 就搶答「鈍角三角形」——<strong>大錯特錯！</strong><br>
+            因為 $2 + 3 = 5$，兩短邊之和根本沒有大於第三邊，連三角形都組不成！
+          </p>
+          <div style="background: #ffffff; border-radius: 10px; padding: 14px 16px; border: 1px solid #fecdd3;">
+            <div style="font-weight: 800; font-size: 0.88rem; color: #991b1b; margin-bottom: 8px;">
+              ⚡ 點擊快速實測典型題目三邊長：
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
+              <button type="button" class="btn-lab-toggle" style="background:#fee2e2; border-color:#fca5a5; color:#991b1b;" onclick="testStepZero(2, 3, 5)">🚨 測試 (2, 3, 5) 陷阱題</button>
+              <button type="button" class="btn-lab-toggle" onclick="testStepZero(3, 4, 5)">📐 測試 (3, 4, 5) 直角題</button>
+              <button type="button" class="btn-lab-toggle" onclick="testStepZero(4, 5, 6)">📐 測試 (4, 5, 6) 銳角題</button>
+              <button type="button" class="btn-lab-toggle" onclick="testStepZero(3, 4, 6)">📐 測試 (3, 4, 6) 鈍角題</button>
+            </div>
+            <div id="stepZeroResult" style="padding: 10px 14px; border-radius: 8px; font-size: 0.9rem; font-weight: 700; background: #fff1f2; color: #991b1b; border: 1px dashed #f43f5e;">
+              👆 點擊上方按鈕，即時觀察「步驟 0 三角形不等式」與「步驟 1 平方和判別」之決策流程！
+            </div>
+          </div>
+        </div>
+
     <!-- 可操作探究實驗室 3：逆定理三態開闔與坐標跨度 -->
     <div class="inquiry-lab-card" id="inquiry_lab_3">
       <div class="lab-header">
@@ -2431,6 +2457,39 @@
         if (CompanionEngine && CompanionEngine.active) {
           CompanionEngine.onIncorrect();
         }
+      }
+    }
+
+    // 元思審查建議：步驟 0 檢驗與形狀判別實測
+    function testStepZero(a, b, c) {
+      const el = document.getElementById('stepZeroResult');
+      if (!el) return;
+      const sides = [a, b, c].sort((x, y) => x - y);
+      const s1 = sides[0], s2 = sides[1], s3 = sides[2];
+      if (s1 + s2 <= s3) {
+        el.style.background = '#fef2f2';
+        el.style.color = '#991b1b';
+        el.style.border = '1px solid #ef4444';
+        el.innerHTML = `🚨 <strong>【步驟 0 檢驗失敗！】</strong> 兩短邊之和 (${s1} + ${s2} = ${s1+s2}) ≤ 最長邊 (${s3})。<br>👉 <strong>根本無法圍成三角形！</strong>（此題直接判定「不構成三角形」，絕不能代入平方和計算！）`;
+      } else {
+        const sumSq = s1*s1 + s2*s2;
+        const cSq = s3*s3;
+        let shape = '';
+        let shapeColor = '';
+        if (sumSq === cSq) {
+          shape = `✅ <strong>直角三角形</strong>（${s1}² + ${s2}² = ${sumSq} 等於 ${s3}² = ${cSq}）`;
+          shapeColor = '#0284c7';
+        } else if (sumSq > cSq) {
+          shape = `🟢 <strong>銳角三角形</strong>（兩短邊平方和 ${sumSq} > 最長邊平方 ${cSq}）`;
+          shapeColor = '#059669';
+        } else {
+          shape = `🟠 <strong>鈍角三角形</strong>（兩短邊平方和 ${sumSq} < 最長邊平方 ${cSq}）`;
+          shapeColor = '#d97706';
+        }
+        el.style.background = '#f0fdf4';
+        el.style.color = '#14532d';
+        el.style.border = '1px solid #86efac';
+        el.innerHTML = `✔️ <strong>【步驟 0 檢驗通過】</strong> ${s1} + ${s2} = ${s1+s2} > ${s3}，三邊可圍成三角形。<br>👉 <strong>【步驟 1 判別結果】</strong> <span style="color:${shapeColor}">${shape}</span>`;
       }
     }
 
