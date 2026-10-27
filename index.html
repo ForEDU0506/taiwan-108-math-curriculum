@@ -5,6 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="HAIC 是一個剛開始整理方向與合作方式的主網站入口。">
   <title>HAIC｜協作起點</title>
+
+  <!-- Access Control Pre-check -->
+  <style id="haic-gate-fouc">
+    html:not(.haic-unlocked) body > *:not(#haic-auth-modal) { display: none !important; }
+    html:not(.haic-unlocked) body { background: #142d3d !important; }
+  </style>
+  <script>
+    (function() {
+      try {
+        var sess = sessionStorage.getItem('haic_auth');
+        var exp = localStorage.getItem('haic_auth_exp');
+        if (sess === 'true' || (exp && Date.now() < parseInt(exp, 10))) {
+          document.documentElement.classList.add('haic-unlocked');
+        }
+      } catch(e) {}
+    })();
+  </script>
+
   <style>
     :root { --ink:#142d3d; --teal:#176d70; --mist:#eef4f2; --paper:#fffdf8; --line:#cddbd7; --muted:#52676e; --amber:#b56e2d; }
     * { box-sizing:border-box; } html { scroll-behavior:smooth; } body { margin:0; background:var(--paper); color:var(--ink); font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif; line-height:1.75; } a { color:inherit; }
@@ -17,9 +35,200 @@
     .workflow-intro { background:var(--ink); color:white; margin-inline:calc((100vw - min(100vw - 2.25rem, 980px))/ -2); padding-inline:calc((100vw - min(100vw - 2.25rem, 980px))/ 2); }.workflow-intro .section-caption { color:#d5e2e2; }.steps { counter-reset:step; display:grid; grid-template-columns:repeat(4,1fr); gap:.75rem; margin:1.7rem 0 1.5rem; }.step { counter-increment:step; border-top:1px solid #a4c7c6; padding:1rem .3rem 0; }.step::before { content:"0" counter(step); display:block; color:#9fd0ce; font:800 .83rem/1 system-ui,sans-serif; letter-spacing:.08em; margin-bottom:.55rem; }.step strong { display:block; font-size:1.13rem; }.step span { display:block; margin-top:.35rem; color:#d5e2e2; font-size:.94rem; line-height:1.55; }.workflow-intro .action { background:var(--paper); color:var(--ink); border-color:var(--paper); }.workflow-intro .action:hover { background:#d9eeee; }
     .projects { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-top:1.8rem; }.project { display:flex; flex-direction:column; align-items:flex-start; padding:1.55rem; border:1px solid var(--line); background:#fff; }.project h3 { margin:0 0 .55rem; font-size:1.4rem; }.project p { color:var(--muted); margin-bottom:1rem; }.project .small-link { margin-top:auto; }.project-kicker { color:var(--teal); font-size:.86rem; font-weight:800; letter-spacing:.08em; margin-bottom:.65rem; }.principles { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem 3rem; margin-top:1.7rem; }.principles article { border-top:1px solid var(--line); padding-top:1rem; }.principles h3 { margin-bottom:.35rem; }.principles p { color:var(--muted); margin-bottom:0; }.contact { padding-bottom:0; border-bottom:0; }.footer { background:#0d202a; color:#d6e1df; padding:2rem 0; }.footer p { margin:0; font-size:.9rem; }
     @media (max-width:720px) { main { padding-top:2.4rem; }.pillars,.projects,.steps { grid-template-columns:1fr; }.pillar { min-height:auto; }.principles { grid-template-columns:1fr; gap:1rem; }.workflow-intro { margin-inline:-1.125rem; padding-inline:1.125rem; } }
+
+    /* Gatekeeper Modal Styling */
+    #haic-auth-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(13, 32, 42, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 1.25rem;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    html.haic-unlocked #haic-auth-modal {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .auth-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      width: min(100%, 420px);
+      padding: 2.5rem 2.2rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+      text-align: center;
+      animation: authCardIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes authCardIn {
+      from { opacity: 0; transform: translateY(16px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .auth-brand {
+      display: inline-grid;
+      place-items: center;
+      width: 3.2rem;
+      height: 3.2rem;
+      border: 2px solid var(--teal);
+      border-radius: 50%;
+      color: var(--teal);
+      font-family: Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 1.2rem;
+      background: var(--mist);
+    }
+    .auth-title {
+      font-family: Georgia, "Noto Serif TC", serif;
+      font-size: 1.55rem;
+      color: var(--ink);
+      margin: 0 0 0.5rem;
+    }
+    .auth-desc {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin: 0 0 1.6rem;
+    }
+    .auth-input-group {
+      position: relative;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+    .auth-input {
+      width: 100%;
+      height: 3rem;
+      padding: 0 2.8rem 0 1rem;
+      border: 1.5px solid var(--line);
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      background: #fafcfb;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .auth-input:focus {
+      border-color: var(--teal);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(23, 109, 112, 0.18);
+    }
+    .auth-toggle-pwd {
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      padding: 0.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .auth-toggle-pwd:hover {
+      color: var(--teal);
+    }
+    .auth-options {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 1.5rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+    }
+    .auth-options input[type="checkbox"] {
+      width: 1.05rem;
+      height: 1.05rem;
+      margin-right: 0.5rem;
+      accent-color: var(--teal);
+      cursor: pointer;
+    }
+    .auth-submit-btn {
+      width: 100%;
+      height: 3rem;
+      background: var(--ink);
+      color: #ffffff;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1.02rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .auth-submit-btn:hover {
+      background: var(--teal);
+    }
+    .auth-submit-btn:active {
+      transform: scale(0.99);
+    }
+    .auth-error {
+      color: #c53030;
+      background: #fff5f5;
+      border: 1px solid #feb2b2;
+      border-radius: 0.4rem;
+      padding: 0.6rem;
+      font-size: 0.86rem;
+      margin-top: 1rem;
+      display: none;
+      animation: shake 0.35s ease;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
   </style>
 </head>
 <body>
+  <!-- Gatekeeper Modal -->
+  <div id="haic-auth-modal" role="dialog" aria-modal="true" aria-labelledby="gate-modal-title">
+    <div class="auth-card">
+      <div class="auth-brand" aria-hidden="true">H</div>
+      <h2 class="auth-title" id="gate-modal-title">HAIC 專案存取授權</h2>
+      <p class="auth-desc">此為內部數學教材與教學研究協作起點，請輸入授權通行密碼以瀏覽完整內容。</p>
+      <form id="haic-auth-form" onsubmit="handleAuthSubmit(event)">
+        <div class="auth-input-group">
+          <input
+            id="haic-pwd-input"
+            class="auth-input"
+            type="password"
+            placeholder="請輸入通行密碼"
+            autocomplete="current-password"
+            required
+            autofocus
+          />
+          <button type="button" class="auth-toggle-pwd" onclick="togglePasswordVisibility()" aria-label="切換密碼顯示">
+            <svg id="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </div>
+        <label class="auth-options">
+          <input type="checkbox" id="haic-remember-device" checked />
+          <span>記住在這台裝置（30 天）</span>
+        </label>
+        <button type="submit" class="auth-submit-btn">
+          <span>驗證並進入</span>
+          <span aria-hidden="true">→</span>
+        </button>
+        <div id="auth-error-msg" class="auth-error">密碼不正確，請再試一次</div>
+      </form>
+    </div>
+  </div>
+
   <a class="skip" href="#content">跳到主要內容</a>
   <header class="site-header"><div class="bar"><a class="brand" href="index.html" aria-label="HAIC 首頁"><span class="brand-mark" aria-hidden="true">H</span><span>HAIC</span></a><button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">展開導覽</button></div><div class="nav-wrap" id="site-nav" hidden><nav class="nav" aria-label="主要導覽"><a href="#about">關於起點</a><a href="#pillars">三條主支柱</a><a href="#projects">子專案</a><a href="workflow.html">工作流程</a><a href="#principles">合作原則</a></nav></div></header>
   <main id="content">
@@ -41,6 +250,70 @@
     <section class="contact" aria-labelledby="next-title"><div class="section-title"><h2 id="next-title">聯絡我們</h2></div><p class="section-caption">想認識 HAIC、試用教材或洽談合作，請填寫聯絡表單，我們會再與您聯繫。</p><a class="action" href="https://forms.gle/gWRpt4LBkkDRHRoAA" target="_blank" rel="noopener">填寫聯絡表單</a></section>
   </main>
   <footer class="footer"><div class="footer-inner"><p>HAIC · 起步中的協作整理入口。此網站不含帳號、登入、雲端同步或敏感資料欄位。</p><p>© 2026 HAIC 人類與AI共融共生研究。教材內容採 CC BY-NC-ND 4.0 授權；程式碼與未公開資料保留所有權利。</p></div></footer>
-  <script>const menuButton=document.querySelector('.menu-button');const nav=document.querySelector('.nav-wrap');menuButton.addEventListener('click',()=>{const open=menuButton.getAttribute('aria-expanded')==='true';menuButton.setAttribute('aria-expanded',String(!open));menuButton.textContent=open?'展開導覽':'收合導覽';nav.hidden=open;});</script>
+  
+  <script>
+    // Header Navigation Toggle
+    const menuButton=document.querySelector('.menu-button');
+    const nav=document.querySelector('.nav-wrap');
+    menuButton.addEventListener('click',()=>{
+      const open=menuButton.getAttribute('aria-expanded')==='true';
+      menuButton.setAttribute('aria-expanded',String(!open));
+      menuButton.textContent=open?'展開導覽':'收合導覽';
+      nav.hidden=open;
+    });
+
+    // Password Gatekeeper Logic
+    // SHA-256 of authorized password
+    const TARGET_HASH = "3957b523c6250bc71744fd15431dcdec0ab5c35f6ecb6b39aae0fb756df46cc9";
+
+    async function computeSHA256(str) {
+      const buffer = new TextEncoder().encode(str);
+      const digest = await crypto.subtle.digest("SHA-256", buffer);
+      return Array.from(new Uint8Array(digest))
+        .map(b => b.toString(16).padStart(2, "0"))
+        .join("");
+    }
+
+    async function handleAuthSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById("haic-pwd-input");
+      const errorMsg = document.getElementById("auth-error-msg");
+      const remember = document.getElementById("haic-remember-device").checked;
+      const pwd = input.value.trim();
+
+      if (!pwd) return;
+
+      const hash = await computeSHA256(pwd);
+      if (hash === TARGET_HASH) {
+        // Unlock site
+        errorMsg.style.display = "none";
+        document.documentElement.classList.add("haic-unlocked");
+        try {
+          sessionStorage.setItem("haic_auth", "true");
+          if (remember) {
+            // Remember for 30 days
+            const expTime = Date.now() + 30 * 24 * 60 * 60 * 1000;
+            localStorage.setItem("haic_auth_exp", expTime.toString());
+          }
+        } catch(err) {}
+      } else {
+        errorMsg.style.display = "block";
+        input.value = "";
+        input.focus();
+      }
+    }
+
+    function togglePasswordVisibility() {
+      const input = document.getElementById("haic-pwd-input");
+      const eyeIcon = document.getElementById("eye-icon");
+      if (input.type === "password") {
+        input.type = "text";
+        eyeIcon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+      } else {
+        input.type = "password";
+        eyeIcon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+      }
+    }
+  </script>
 </body>
 </html>
